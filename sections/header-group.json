@@ -20,6 +20,7 @@
     },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {
         "menu": "main-menu"
       }
@@ -28,11 +29,19 @@
       "type": "custom-section",
       "name": "t:general.custom_section",
       "settings": {}
+    },
+    "header1_3c9x8i": {
+      "type": "header1",
+      "name": "Custom Header",
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   },
   "order": [
     "announcement_bar_FBhmLQ",
     "header",
-    "custom_section_9MwC8N"
+    "custom_section_9MwC8N",
+    "header1_3c9x8i"
   ]
 }
