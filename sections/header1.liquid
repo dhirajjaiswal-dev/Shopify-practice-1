@@ -1,0 +1,67 @@
+<header class="site-header">
+  <div class="header-wrapper">
+    <!-- Logo (Left) -->
+    <div class="header-logo">
+      {% if section.settings.logo != blank %}
+        <a href="{{ routes.root_url }}">
+          <img
+            src="{{ section.settings.logo | image_url: width: 200 }}"
+            alt="{{ shop.name }}"
+            width="200"
+            height="200"
+          >
+        </a>
+      {% else %}
+        <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+      {% endif %}
+    </div>
+
+    <!-- Navigation Menu (Center) -->
+    <nav class="header-nav">
+      <ul>
+        {% for link in linklists[section.settings.menu].links %}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- Icons (Right) -->
+    <div class="header-icons">
+      <!-- Search -->
+      <a href="{{ routes.search_url }}" aria-label="Search">
+        <img src="{{ 'search.svg' | asset_url }}" alt="sdf" width="20" height="20">
+      </a>
+
+      <!-- Account -->
+      <a href="{{ routes.account_url }}" aria-label="Account">
+        <img src="{{ 'user.svg' | asset_url }}" alt="sdf" width="20" height="20">
+      </a>
+
+      <!-- Cart -->
+      <a href="{{ routes.cart_url }}" aria-label="Cart">
+        <img src="{{ 'cart.svg' | asset_url }}" alt="sdf" width="20" height="20">
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}
