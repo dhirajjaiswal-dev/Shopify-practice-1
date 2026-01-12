@@ -34,6 +34,7 @@
       "type": "header1",
       "name": "Custom Header",
       "settings": {
+        "logo": "shopify://shop_images/Vector.png",
         "menu": "main-menu"
       }
     }
