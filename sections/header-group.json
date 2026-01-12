@@ -11,6 +11,13 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement_bar_FBhmLQ": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "heading": "<p>15% Off over ₹5000 Use Code WELLIEWOW</p>"
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -18,5 +25,8 @@
       }
     }
   },
-  "order": ["header"]
+  "order": [
+    "announcement_bar_FBhmLQ",
+    "header"
+  ]
 }
