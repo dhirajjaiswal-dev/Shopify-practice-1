@@ -31,17 +31,32 @@
     <div class="header-icons">
       <!-- Search -->
       <a href="{{ routes.search_url }}" aria-label="Search">
-        <img src="{{ 'search.svg' | asset_url }}" alt="sdf" width="20" height="20">
+        <img
+          src="{{ 'https://cdn.shopify.com/s/files/1/0733/3986/3212/files/search_-_01.png?v=1768223726' }}"
+          alt="search icon"
+          width="20"
+          height="20"
+        >
       </a>
 
       <!-- Account -->
       <a href="{{ routes.account_url }}" aria-label="Account">
-        <img src="{{ 'user.svg' | asset_url }}" alt="sdf" width="20" height="20">
+        <img
+          src="{{ 'https://cdn.shopify.com/s/files/1/0733/3986/3212/files/user_-_01.png?v=1768223704' }}"
+          alt="user icon"
+          width="20"
+          height="20"
+        >
       </a>
 
       <!-- Cart -->
       <a href="{{ routes.cart_url }}" aria-label="Cart">
-        <img src="{{ 'cart.svg' | asset_url }}" alt="sdf" width="20" height="20">
+        <img
+          src="{{ 'https://cdn.shopify.com/s/files/1/0733/3986/3212/files/shopping_cart_-_01.png?v=1768223727' }}"
+          alt="cart icon"
+          width="20"
+          height="20"
+        >
       </a>
     </div>
   </div>
@@ -49,7 +64,7 @@
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "Custom Header",
   "settings": [
     {
       "type": "image_picker",
@@ -61,6 +76,11 @@
       "id": "menu",
       "label": "Navigation Menu",
       "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Header"
     }
   ]
 }
