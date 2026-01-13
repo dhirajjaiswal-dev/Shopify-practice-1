@@ -178,3 +178,8 @@ input[type="search"]::-moz-search-clear-button {
   --tw-translate-x: 1.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
+button.shopify-payment-button__button.shopify-payment-button__button--unbranded {
+    background: #0f5e59 !important;
+    padding-bottom: 30px;
+}

@@ -1,0 +1,185 @@
+<section class="w-full bg-[#FFF9F5] py-10">
+  <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <!-- LEFT: PRODUCT IMAGES -->
+      <div>
+        <div class="rounded-2xl overflow-hidden bg-white border">
+          <img
+            id="MainProductImage"
+            src="{{ product.featured_image | image_url: width: 900 }}"
+            alt="{{ product.title }}"
+            class="w-full h-auto object-cover"
+            width="900"
+            height="900"
+            loading="eager"
+          >
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="flex gap-3 mt-4">
+          {% for image in product.images %}
+            <button
+              type="button"
+              onclick="document.getElementById('MainProductImage').src='{{ image | image_url: width: 900 }}'"
+              class="border rounded-lg p-1 hover:border-black"
+            >
+              <img
+                src="{{ image | image_url: width: 120 }}"
+                alt="{{ product.title }}"
+                class="w-20 h-20 object-cover rounded"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- RIGHT: PRODUCT DETAILS -->
+      <div>
+        {% if section.settings.badge_text != blank %}
+          <span class="inline-block bg-pink-100 text-pink-600 text-sm font-semibold px-3 py-1 rounded-full mb-4">
+            {{ section.settings.badge_text }}
+          </span>
+        {% endif %}
+
+        <h1 class="text-4xl font-bold mb-2">
+          {{ product.title }}
+        </h1>
+
+        <!-- Price -->
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-2xl font-bold">
+            {{ product.price | money }}
+          </span>
+
+          {% if product.compare_at_price > product.price %}
+            <span class="line-through text-gray-400">
+              {{ product.compare_at_price | money }}
+            </span>
+          {% endif %}
+        </div>
+
+        <p class="text-sm text-gray-500 mb-4">MRP Inclusive of all taxes</p>
+
+        <!-- Benefit Box -->
+        {% if section.settings.benefit_text != blank %}
+          <div class="bg-pink-50 border border-pink-200 rounded-xl p-4 mb-6">
+            <div class="font-semibold text-pink-700 mb-1">
+              {{ section.settings.benefit_title }}
+            </div>
+            <p class="text-sm text-gray-600">
+              {{ section.settings.benefit_text }}
+            </p>
+          </div>
+        {% endif %}
+
+        <!-- PRODUCT FORM -->
+        <form method="post" action="/cart/add" id="product-form" class="space-y-6">
+          <input
+            type="hidden"
+            name="id"
+            value="{{ product.selected_or_first_available_variant.id }}"
+          >
+
+          <!-- Variants -->
+          {% if product.variants.size > 1 %}
+            <div>
+              <p class="font-semibold mb-2">Select Size</p>
+              <div class="flex flex-wrap gap-3">
+                {% for variant in product.variants %}
+                  <label class="cursor-pointer">
+                    <input
+                      type="radio"
+                      name="id"
+                      value="{{ variant.id }}"
+                      class="hidden peer"
+                      {% if variant == product.selected_or_first_available_variant %}
+                        checked
+                      {% endif %}
+                    >
+                    <span class="px-4 py-2 border rounded-full peer-checked:bg-teal-700 peer-checked:text-black">
+                      {{ variant.title }}
+                    </span>
+                  </label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- Quantity + Add to Cart -->
+          <div class="flex gap-4">
+            <input
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              class="w-20 border rounded-lg text-center"
+            >
+
+            <button
+              type="submit"
+              class="flex-1 bg-teal-700 text-white py-3 rounded-xl font-semibold hover:bg-teal-800 transition"
+            >
+              🛒 Add to Cart
+            </button>
+          </div>
+
+          <!-- Buy Now -->
+          <button
+            type="submit"
+            name="checkout"
+            class="w-full border border-teal-700 text-teal-700 py-3 rounded-xl font-semibold"
+          >
+            Buy It Now
+          </button>
+        </form>
+
+        <!-- Offers -->
+        {% if section.settings.offer_text != blank %}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+            <div class="border rounded-xl p-3 text-sm">
+              {{ section.settings.offer_text }}
+            </div>
+            <div class="border rounded-xl p-3 text-sm">
+              {{ section.settings.offer_text }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Top Badge Text",
+      "default": "India’s #1 Advanced Dog Food"
+    },
+    {
+      "type": "text",
+      "id": "benefit_title",
+      "label": "Benefit Title",
+      "default": "🧬 30% Digestive Health Improvement"
+    },
+    {
+      "type": "textarea",
+      "id": "benefit_text",
+      "label": "Benefit Description",
+      "default": "Results may vary based on pet size, diet, and health."
+    },
+    {
+      "type": "textarea",
+      "id": "offer_text",
+      "label": "Offer Text",
+      "default": "🎁 Get it for ₹3,190 — Copy code to get 10% off"
+    }
+  ]
+}
+{% endschema %}

@@ -1,13 +1,273 @@
-<div class="w-full px-8">
-  <h1 class="text-2xl font-bold text-center">{{ product.title }}</h1>
-</div>
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- LEFT: PRODUCT IMAGES -->
+    <div class="space-y-4">
+      {% if product.images.size > 0 %}
+        <!-- MAIN IMAGE SLIDER -->
+        <div class="relative overflow-hidden rounded-2xl">
+          {% for image in product.images %}
+            <img
+              src="{{ image | image_url: width: 1000 }}"
+              alt="{{ product.title }}"
+              class="product-slide w-full object-cover transition-opacity duration-300 {% if forloop.first %}opacity-100{% else %}opacity-0 absolute inset-0{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              width="1000"
+              height="1000"
+              loading="eager"
+            >
+          {% endfor %}
 
-{% schema %}
-{
-  "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
-}
-{% endschema %}
+          <!-- LEFT ARROW -->
+          <button
+            type="button"
+            class="absolute left-4 top-1/2 -translate-y-1/2 bg-pink-700 p-2 rounded-full"
+            onclick="prevImage()"
+          >
+            ‹
+          </button>
+
+          <!-- RIGHT ARROW -->
+          <button
+            type="button"
+            class="absolute right-4 top-1/2 -translate-y-1/2 bg-pink-700 p-2 rounded-full"
+            onclick="nextImage()"
+          >
+            ›
+          </button>
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="flex gap-3 mt-4">
+          {% for image in product.images %}
+            <img
+              src="{{ image | image_url: width: 200 }}"
+              alt="{{ product.title }}"
+              class="w-20 h-20 rounded-xl object-cover cursor-pointer border hover:border-black"
+              onclick="goToImage({{ forloop.index0 }})"
+              width="20"
+              height="20"
+              loading="eager"
+            >
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT: PRODUCT INFO -->
+    <div class="space-y-6">
+      <div class="flex items-center gap-4">
+        <!-- Badge -->
+        <span
+          class="
+            inline-flex
+            items-center
+            bg-[#FF2B8B]
+            text-white
+            text-xs
+            font-semibold
+            px-4
+            py-1.5
+            rounded-full
+            leading-none
+          "
+        >
+          India’s #1 Advanced Dog Food
+        </span>
+
+        <!-- Rating -->
+        <div class="flex items-center gap-1 text-[#025A60] text-sm font-semibold">
+          <!-- Star Icon -->
+          <svg
+            class="w-4 h-4 fill-[#FFC107]"
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+          >
+            <path d="M10 1.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L10 1.5z"/>
+          </svg>
+
+          <span>4.4</span>
+          <span class="text-[#025A60]/70">(1,900+ Reviews)</span>
+        </div>
+      </div>
+
+      <!-- Title -->
+
+      <h1
+        class="
+          font-['Fredoka']
+          font-black
+          text-[32px]
+          md:text-[44px]
+          leading-[1.05]
+          tracking-tight
+        "
+      >
+        {{ product.title }}
+      </h1>
+
+      <!-- Price -->
+      <div class="flex items-center gap-4">
+        <span class="text-2xl font-semibold text-gray-900">
+          {{ product.price | money }}
+        </span>
+
+        {% if product.compare_at_price > product.price %}
+          <span class="text-gray-400 line-through">
+            {{ product.compare_at_price | money }}
+          </span>
+        {% endif %}
+      </div>
+
+      <!-- Product Form -->
+      {% form 'product', product, class: 'space-y-6' %}
+        <!-- Variant Options -->
+        {% for option in product.options_with_values %}
+          <div>
+            <div
+              class="
+                w-[409px]
+                h-[55px]
+                flex
+                items-center
+                gap-[10px]
+                object-contain
+                px-[10px]
+                py-[8.5px]
+                border
+                border-[0.4px]
+                rounded-[6px]
+                bg-[#E52888]/[0.05]
+                opacity-100
+              "
+            >
+              <img
+                src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Frame_3825.png?v=1768277738"
+                alt="Form img"
+                height="150px"
+                width="70%"
+                {% comment %} class="bg-pink-100 border border-radius-[70px]" {% endcomment %}
+              >
+            </div>
+
+            <label class="block text-sm font-medium mb-2 mt-4"> {{ option.name }} </label>
+
+            <div class="flex flex-wrap gap-3">
+              {% for value in option.values %}
+                <label class="cursor-pointer rounded-[30px]">
+                  <input
+                    type="radio"
+                    name="options[{{ option.name }}]"
+                    value="{{ value }}"
+                    class="peer hidden"
+                    {% if forloop.first %}
+                      checked
+                    {% endif %}
+                  >
+                  <span
+                    class="
+                      px-4 py-2 rounded-full border bg-[#025A60]/[0.08]
+                      text-[#025A60] rounded-[40px] text-sm peer-checked:bg-teal-700 peer-checked:text-white peer-checked:border-teal-700
+                    "
+                  >
+                    {{ value }}
+                  </span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <!-- Quantity -->
+        <div class="flex items-center gap-4">
+          {% comment %} <span class="text-sm font-medium"></span> {% endcomment %}
+          <div class="flex items-center border rounded-xl border-[1px] border-[#025A60] p-1 ">
+            <button
+              type="button"
+              class="
+                px-3 py-2 bg-[#025A60]/[0.08]
+                text-[#025A60] rounded-xl
+              "
+            >
+              −
+            </button>
+            <input
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              class="w-12 text-center outline-none"
+            >
+            <button
+              type="button"
+              class="
+                px-3 py-2 bg-[#025A60]/[0.08]
+                text-[#025A60] rounded-xl
+              "
+            >
+              +
+            </button>
+          </div>
+
+          <!-- Add to Cart -->
+          <button
+            type="submit"
+            class="w-full bg-teal-800 text-white py-4 rounded-xl font-semibold hover:bg-teal-900 transition"
+          >
+            Add to cart
+          </button>
+        </div>
+        <!-- Buy Now -->
+        {% comment %} {{ form | payment_button }} {% endcomment %}
+        <div
+          class="
+               [&_.shopify-payment-button__button]:
+                 w-full
+               [&_.shopify-payment-button__button]:
+                 h-[55px]
+               [&_.shopify-payment-button__button]:
+                 rounded-xl
+               [&_.shopify-payment-button__button]:
+                background-color: #134b45 !important;
+            [&_.shopify-payment-button__button]:
+                 text-white
+               [&_.shopify-payment-button__button]:
+                 font-semibold
+               {% comment %} [&_.shopify-payment-button__button]:
+                 hover:bg-teal-900 {% endcomment %}
+               [&_.shopify-payment-button__button]:
+                 transition
+          "
+        >
+          {{ form | payment_button }}
+        </div>
+        <div
+          class="flex justify-between"
+        >
+          <img
+            src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4113.png?v=1768285050"
+            alt="Form img"
+            height="130px"
+            width="49%"
+            margin-right:
+            10px;
+            {% comment %} class="bg-pink-100 border border-radius-[70px]" {% endcomment %}
+          >
+          <img
+            src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4113.png?v=1768285050"
+            alt="Form img"
+            height="130px"
+            width="49%"
+            {% comment %} class="bg-pink-100 border border-radius-[70px]" {% endcomment %}
+          >
+        </div>
+      {% endform %}
+
+      <!-- Description -->
+      <div class="prose max-w-none text-gray-700">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'image-slider.js' | asset_url }}" defer></script>
