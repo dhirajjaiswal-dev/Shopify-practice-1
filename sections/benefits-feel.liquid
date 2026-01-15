@@ -1,0 +1,162 @@
+<section class=" max-w-6xl mx-auto px-20 py-7" style="background-color: {{ section.settings.bg_color }}">
+  <div class="benefits-feel__container">
+    <!-- Heading -->
+    <h2 class="benefits-feel__heading">
+      {{ section.settings.heading }}
+    </h2>
+
+    <!-- Benefits Grid -->
+    <div class="benefits-feel__grid">
+      {% for block in section.blocks %}
+        <div class="benefits-feel__item" {{ block.shopify_attributes }}>
+          <div class="benefits-feel__number">
+            {{ block.settings.number }}
+          </div>
+          <div class="benefits-feel__content">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="mt-6 pt-6 flex w-full items-center justify-between">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4118.png?v=1768451535"
+      alt="Benefits Feel"
+      class="benefits-feel__image"
+      loading="lazy"
+      width="100"
+      height="100"
+    >
+    <img
+      src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4119.png?v=1768451630"
+      alt="Benefits Feel"
+      class="benefits-feel__image"
+      loading="lazy"
+      width="100"
+      height="100"
+    >
+  </div>
+</section>
+
+<style>
+  .benefits-feel {
+    padding: 80px 20px;
+    color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' padding='30px' fill='none'%3E%3Cpath d='M20 20h20v20H20z' stroke='rgba(255,255,255,0.08)'/%3E%3C/svg%3E");
+  }
+
+  {% comment %} .benefits-feel__container {
+    max-width: 800px;
+    margin: 0 auto;
+
+  } {% endcomment %}
+
+  .benefits-feel__heading {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 60px;
+  }
+
+  .benefits-feel__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 60px;
+  }
+
+  .benefits-feel__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .benefits-feel__number {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .benefits-feel__content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .benefits-feel__content p {
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .benefits-feel__heading {
+      font-size: 30px;
+    }
+
+    .benefits-feel__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Benefits – Pet Can Feel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Benefits your pet can feel."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#EC2C86"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Supports Digestive Health"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Benefits – Pet Can Feel",
+      "blocks": [{ "type": "benefit" }, { "type": "benefit" }, { "type": "benefit" }, { "type": "benefit" }]
+    }
+  ]
+}
+{% endschema %}

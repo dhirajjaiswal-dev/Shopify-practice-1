@@ -1,0 +1,64 @@
+<section class="max-w-5xl mx-auto px-4 py-10">
+  {% if cart.item_count > 0 %}
+    <h1 class="text-2xl font-semibold mb-8">Your Cart</h1>
+
+    <form action="{{ routes.cart_url }}" method="post">
+      <div class="space-y-6">
+        {% for item in cart.items %}
+          <div class="flex items-center gap-6 border-b pb-6">
+            <img
+              src="{{ item.image | image_url: width: 150 }}"
+              class="h-24 w-24 object-contain"
+            >
+
+            <div class="flex-1">
+              <h2 class="text-sm font-medium">{{ item.product.title }}</h2>
+
+              {% if item.variant.title != 'Default Title' %}
+                <p class="text-xs text-gray-500">{{ item.variant.title }}</p>
+              {% endif %}
+
+              <p class="text-sm mt-2">{{ item.final_price | money }}</p>
+            </div>
+
+            <!-- Quantity -->
+            <input
+              type="number"
+              name="updates[{{ item.key }}]"
+              value="{{ item.quantity }}"
+              min="1"
+              class="w-16 border rounded px-2 py-1 text-sm"
+            >
+
+            <!-- Remove (SAFE) -->
+            <button
+              type="submit"
+              name="updates[{{ item.key }}]"
+              value="0"
+              class="text-xs text-red-600"
+            >
+              Remove
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-10 flex justify-between items-center">
+        <p class="text-lg font-semibold">Subtotal: {{ cart.total_price | money }}</p>
+
+        <button
+          type="submit"
+          class="px-6 py-2 border rounded"
+        >
+          Update cart
+        </button>
+      </div>
+    </form>
+
+  {% else %}
+    <div class="text-center py-20">
+      <h2 class="text-xl mb-4">Your cart is empty</h2>
+      <a href="{{ routes.all_products_collection_url }}" class="underline"> Continue shopping </a>
+    </div>
+  {% endif %}
+</section>

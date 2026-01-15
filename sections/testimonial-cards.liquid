@@ -1,0 +1,128 @@
+<h2 class="text-3xl font-semibold mb-8 text-center text-gray-900 pt-12">Hear from our Customers!</h2>
+
+<section class="max-w-7xl mx-auto px-20 py-10">
+  <div class="flex gap-3 overflow-x-auto">
+    {% for block in section.blocks %}
+      <div
+        class="flex gap-4 bg-white rounded-2xl p-4 min-w-[380px] max-w-[300px] h-[240px] overflow-hidden border"
+      >
+        <!-- LEFT IMAGE -->
+        {% if block.settings.image != blank %}
+          <div class="h-full w-36 flex-shrink-0 overflow-hidden rounded-xl">
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              class="h-full w-full object-cover"
+              loading="lazy"
+              alt=""
+              width="160"
+              height="240"
+            >
+          </div>
+        {% endif %}
+
+        <!-- RIGHT CONTENT -->
+        <div class="flex flex-col justify-between overflow-hidden">
+          <!-- Quote + Stars -->
+          <div>
+            {% if block.settings.quote_icon != blank %}
+              <img
+                src="{{ block.settings.quote_icon | image_url: width: 60 }}"
+                class="w-6 h-6 mb-1"
+                loading="lazy"
+                alt=""
+                width="40"
+                height="40"
+              >
+            {% endif %}
+
+            <!-- Stars -->
+            <div class="flex items-center gap-1 text-orange-400 text-sm">
+              {% for i in (1..block.settings.rating) %}
+                ★
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Text -->
+          <p class="text-sm text-gray-700 leading-snug mt-2 line-clamp-4">
+            {{ block.settings.text }}
+          </p>
+
+          <!-- Author -->
+          <div class="flex items-center gap-2 mt-3">
+            {% if block.settings.avatar != blank %}
+              <img
+                src="{{ block.settings.avatar | image_url: width: 60 }}"
+                class="w-6 h-6 rounded-full object-cover"
+                loading="lazy"
+                alt=""
+                width="40"
+                height="40"
+              >
+            {% endif %}
+            <span class="text-xs font-medium text-gray-900">
+              {{ block.settings.author }}
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial Cards",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Main image"
+        },
+        {
+          "type": "image_picker",
+          "id": "quote_icon",
+          "label": "Quote icon (above stars)"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testimonial text",
+          "default": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Author image"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Mr. Marc John"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Cards",
+      "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }, { "type": "testimonial" }]
+    }
+  ]
+}
+{% endschema %}

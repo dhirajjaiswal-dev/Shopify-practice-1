@@ -53,26 +53,26 @@
       {% endif %}
     </div>
 
-    <!-- RIGHT: PRODUCT INFO -->
     <div class="space-y-6">
-      <div class="flex items-center gap-4">
-        <!-- Badge -->
-        <span
-          class="
-            inline-flex
-            items-center
-            bg-[#FF2B8B]
-            text-white
-            text-xs
-            font-semibold
-            px-4
-            py-1.5
-            rounded-full
-            leading-none
-          "
-        >
-          India’s #1 Advanced Dog Food
-        </span>
+      <div class="flex items-center gap-4 justify-between">
+        {% if product.metafields.custom.product_tagline != blank %}
+          <span
+            class="
+              inline-flex
+              items-center
+              bg-[#FF2B8B]
+              text-white
+              text-xs
+              font-semibold
+              px-4
+              py-1.5
+              rounded-full
+              leading-none
+            "
+          >
+            {{ product.metafields.custom.product_tagline }}
+          </span>
+        {% endif %}
 
         <!-- Rating -->
         <div class="flex items-center gap-1 text-[#025A60] text-sm font-semibold">
@@ -106,7 +106,7 @@
       </h1>
 
       <!-- Price -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 m-0 p-0">
         <span class="text-2xl font-semibold text-gray-900">
           {{ product.price | money }}
         </span>
@@ -117,56 +117,105 @@
           </span>
         {% endif %}
       </div>
+      <div class="text-gray-900 p-0 m-0">MRP Inclusive of all taxes</div>
 
-      <!-- Product Form -->
+      {% comment %} ////////////////////////////////////////////////////// {% endcomment %}
+
+      {% comment %} Product Form {% endcomment %}
+
       {% form 'product', product, class: 'space-y-6' %}
-        <!-- Variant Options -->
+        {% comment %} Variant Options {% endcomment %}
         {% for option in product.options_with_values %}
           <div>
-            <div
-              class="
-                w-[409px]
-                h-[55px]
-                flex
-                items-center
-                gap-[10px]
-                object-contain
-                px-[10px]
-                py-[8.5px]
-                border
-                border-[0.4px]
-                rounded-[6px]
-                bg-[#E52888]/[0.05]
-                opacity-100
-              "
-            >
-              <img
-                src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Frame_3825.png?v=1768277738"
-                alt="Form img"
-                height="150px"
-                width="70%"
-                {% comment %} class="bg-pink-100 border border-radius-[70px]" {% endcomment %}
-              >
-            </div>
+            {% assign product_benefits = product.metafields.custom.product_benefits.value %}
+            {% if product_benefits != blank %}
+              <div class="mt-2 pt-2 max-w-md">
+                {% comment %} <h2 class="text-2xl font-bold text-gray-900 mb-6">Product Benefits</h2> {% endcomment %}
 
-            <label class="block text-sm font-medium mb-2 mt-4"> {{ option.name }} </label>
+                <div
+                  class="
+                    flex
+                    items-start
+                    gap-4
+                    bg-[#FFE4EF]
+                    border
+                    border-[#FF2B8B]
+                    rounded-xl
+                    p-2
+                  "
+                >
+                  <!-- Icon -->
+                  {% if product_benefits.image != blank %}
+                    <img
+                      src="{{ product_benefits.image | image_url: width: 80 }}"
+                      alt="Product benefit icon"
+                      class="w-10 h-10 object-contain flex-shrink-0"
+                      width="30"
+                      height="30"
+                    >
+                  {% endif %}
 
-            <div class="flex flex-wrap gap-3">
+                  <!-- Text -->
+                  <div class="space-y-1 text-sm">
+                    <!-- Title -->
+                    <p class="text-sm font-semibold text-gray-900">
+                      {{ product_benefits.title }}
+                    </p>
+
+                    <!-- Disclaimer -->
+                    <p class="text-xs text-gray-600 leading-loose">
+                      {{ product_benefits.details | metafield_tag }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% comment %} <label class="block text-sm leading-loose font-medium pb-4 pt-4"> {{ option.name }} </label> {% endcomment %}
+
+            {% comment %} <div class="flex flex-nowrap gap-3 overflow-x-auto"> {% endcomment %}
+          </div>
+        {% endfor %}
+      {% endform %}
+
+      {% comment %} /////////////////////////////////////////////////////// {% endcomment %}
+
+      {% form 'product', product, class: 'space-y-6', id: 'ProductForm' %}
+        <!-- This is what Shopify actually submits -->
+        <input
+          type="hidden"
+          name="id"
+          id="SelectedVariantId"
+          value="{{ product.selected_or_first_available_variant.id }}"
+        >
+
+        <!-- VARIANT OPTIONS -->
+        {% for option in product.options_with_values %}
+          <div>
+            <label class="block text-sm font-medium pb-4 pt-4">
+              {{ option.name }}
+            </label>
+
+            <div class="flex flex-wrap gap-4">
               {% for value in option.values %}
-                <label class="cursor-pointer rounded-[30px]">
+                <label class="cursor-pointer">
                   <input
                     type="radio"
-                    name="options[{{ option.name }}]"
+                    class="peer hidden variant-option"
+                    name="option-{{ option.position }}"
                     value="{{ value }}"
-                    class="peer hidden"
                     {% if forloop.first %}
                       checked
                     {% endif %}
                   >
                   <span
                     class="
-                      px-4 py-2 rounded-full border bg-[#025A60]/[0.08]
-                      text-[#025A60] rounded-[40px] text-sm peer-checked:bg-teal-700 peer-checked:text-white peer-checked:border-teal-700
+                      px-4 py-3 rounded-full border
+                      bg-[#025A60]/[0.08] text-[#025A60]
+                      text-sm whitespace-nowrap
+                      peer-checked:bg-teal-700
+                      peer-checked:text-white
+                      peer-checked:border-teal-700
                     "
                   >
                     {{ value }}
@@ -177,97 +226,76 @@
           </div>
         {% endfor %}
 
-        <!-- Quantity -->
-        <div class="flex items-center gap-4">
-          {% comment %} <span class="text-sm font-medium"></span> {% endcomment %}
-          <div class="flex items-center border rounded-xl border-[1px] border-[#025A60] p-1 ">
-            <button
-              type="button"
-              class="
-                px-3 py-2 bg-[#025A60]/[0.08]
-                text-[#025A60] rounded-xl
-              "
-            >
-              −
-            </button>
+        <!-- QUANTITY -->
+        <div class="flex items-center gap-4 pt-8">
+          <div class="flex items-center border rounded-xl border-[#025A60] p-1">
+            <button type="button" class="qty-minus px-3 py-2 bg-[#025A60]/[0.08] text-[#025A60] rounded-xl">−</button>
+
             <input
               type="number"
               name="quantity"
               value="1"
               min="1"
-              class="w-12 text-center outline-none"
+              class="qty-input w-12 text-center outline-none bg-transparent"
             >
-            <button
-              type="button"
-              class="
-                px-3 py-2 bg-[#025A60]/[0.08]
-                text-[#025A60] rounded-xl
-              "
-            >
-              +
-            </button>
+
+            <button type="button" class="qty-plus px-3 py-2 bg-[#025A60]/[0.08] text-[#025A60] rounded-xl">+</button>
           </div>
 
-          <!-- Add to Cart -->
           <button
             type="submit"
-            class="w-full bg-teal-800 text-white py-4 rounded-xl font-semibold hover:bg-teal-900 transition"
+            class="flex-1 bg-teal-800 text-white py-4 rounded-xl font-semibold hover:bg-teal-900 transition"
           >
             Add to cart
           </button>
         </div>
-        <!-- Buy Now -->
-        {% comment %} {{ form | payment_button }} {% endcomment %}
-        <div
-          class="
-               [&_.shopify-payment-button__button]:
-                 w-full
-               [&_.shopify-payment-button__button]:
-                 h-[55px]
-               [&_.shopify-payment-button__button]:
-                 rounded-xl
-               [&_.shopify-payment-button__button]:
-                background-color: #134b45 !important;
-            [&_.shopify-payment-button__button]:
-                 text-white
-               [&_.shopify-payment-button__button]:
-                 font-semibold
-               {% comment %} [&_.shopify-payment-button__button]:
-                 hover:bg-teal-900 {% endcomment %}
-               [&_.shopify-payment-button__button]:
-                 transition
-          "
-        >
-          {{ form | payment_button }}
-        </div>
-        <div
-          class="flex justify-between"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4113.png?v=1768285050"
-            alt="Form img"
-            height="130px"
-            width="49%"
-            margin-right:
-            10px;
-            {% comment %} class="bg-pink-100 border border-radius-[70px]" {% endcomment %}
-          >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4113.png?v=1768285050"
-            alt="Form img"
-            height="130px"
-            width="49%"
-            {% comment %} class="bg-pink-100 border border-radius-[70px]" {% endcomment %}
-          >
-        </div>
       {% endform %}
 
-      <!-- Description -->
-      <div class="prose max-w-none text-gray-700">
-        {{ product.description }}
-      </div>
+      {% assign voucher = product.metafields.custom.voucher.value %}
+
+      {% if voucher %}
+        <div class="grid grid-cols-2 gap-4">
+          {% for voucher in voucher %}
+            <div
+              class="
+                flex items-center gap-2 rounded-xl border border-dashed border-gray-300 bg-[#025A60]/[0.08]
+                text-[#025A60] p-4 max-w-md
+              "
+            >
+              <img
+                src="{{ voucher.voucher_image | image_url: width: 200 }}"
+                class="h-10 w-10 object-contain object-center"
+                width="20"
+                height="20"
+              >
+
+              <div class="flex-1 text-[#025A60] font-semibold">
+                <h3 class="text-sm font-semibold">{{ voucher.voucher_title }}</h3>
+                <p class="text-xs ">{{ voucher.voucher_description }}</p>
+              </div>
+
+              <a
+                href="{{ voucher.voucher_copy_image.url }}"
+                class="rounded-lg px-1 py-1.5 h-10 w-10 object-contain object-center"
+              >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/File.png?v=1768355583"
+                  alt="Copy"
+                  width="30"
+                  height="30"
+                >
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
 
+<script type="application/json" id="product-variants-json">
+  {{ product.variants | json }}
+</script>
+
 <script src="{{ 'image-slider.js' | asset_url }}" defer></script>
+<script src="{{ 'quantity-logic.js' | asset_url }}" defer></script>
