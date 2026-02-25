@@ -12,19 +12,19 @@
     "hero_banner_AiN3fp": {
       "type": "hero-banner",
       "name": "Hero Banner",
-      "settings": {
-        "heading": "<p>Welcome</p>"
-      }
+      "settings": {}
     },
     "product_grid_99YYr7": {
       "type": "product-grid",
       "name": "Product Grid",
       "settings": {
-        "collection": "main-collection",
         "heading": "Featured products",
-        "products_limit": 8
+        "products_limit": 12
       }
     }
   },
-  "order": ["hero_banner_AiN3fp", "product_grid_99YYr7"]
+  "order": [
+    "hero_banner_AiN3fp",
+    "product_grid_99YYr7"
+  ]
 }
