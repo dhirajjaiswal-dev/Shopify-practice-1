@@ -1,0 +1,24 @@
+<section class="search">
+  <div class="search__content">
+    {{ section.settings.heading }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "class": "search-section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search"
+    }
+  ]
+}
+{% endschema %}

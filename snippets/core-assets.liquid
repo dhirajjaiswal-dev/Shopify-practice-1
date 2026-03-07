@@ -1,0 +1,4 @@
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'tailwind.css' | asset_url | stylesheet_tag: preload: true }}
+
+<script src="{{ 'lazy-video.js' | asset_url }}" defer></script>

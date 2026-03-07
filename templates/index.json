@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_banner_AiN3fp": {
+      "type": "hero-banner",
+      "name": "Hero Banner",
+      "settings": {
+        "heading": "<p>Welcome</p>"
+      }
+    },
+    "product_grid_99YYr7": {
+      "type": "product-grid",
+      "name": "Product Grid",
+      "settings": {
+        "heading": "Featured products",
+        "products_limit": 8
+      }
+    }
+  },
+  "order": [
+    "hero_banner_AiN3fp",
+    "product_grid_99YYr7"
+  ]
+}

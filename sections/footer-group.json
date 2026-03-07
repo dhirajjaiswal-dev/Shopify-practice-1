@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:general.footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "menu": "main-menu",
+        "footer_desktop_background": "shopify://shop_images/image_21392.png",
+        "footer_mobile_background": "shopify://shop_images/image_21392_1.png",
+        "footer_copyright_text": "<p>© 2026 inc. all rights reserved.</p>"
+      }
+    }
+  },
+  "order": ["footer"]
+}

@@ -1,0 +1,65 @@
+{% liquid
+  assign item = item | default: empty
+
+  unless item != empty
+    echo '<!-- Error: item parameter required for cart-item snippet -->'
+    break
+  endunless
+%}
+
+<div class="flex gap-4 pb-4 border-b">
+  {% if item.image %}
+    <a href="{{ item.url }}" class="flex-shrink-0">
+      <img
+        src="{{ item.image | image_url: width: 150 }}"
+        alt="{{ item.image.alt | escape }}"
+        class="w-20 h-20 object-cover"
+        width="150"
+        height="150"
+        loading="lazy"
+      >
+    </a>
+  {% endif %}
+  <div class="flex-1 min-w-0">
+    <a href="{{ item.url }}" class="block mb-2">
+      <h3 class="text-sm md:text-base font-medium line-clamp-2 hover:underline">
+        {{ item.product.title }}
+      </h3>
+      {% if item.variant.title != 'Default Title' %}
+        <p class="text-xs text-gray-600 mt-1">{{ item.variant.title }}</p>
+      {% endif %}
+    </a>
+    <div class="flex items-center justify-between">
+      <cart-actions data-line="{{ index }}">
+        <div class="flex items-center gap-2 border border-gray-200 rounded-md p-2">
+          <button
+            data-quantity="{{ item.quantity | minus: 1 }}"
+            data-minus
+            class="quantity__button quantity-minus"
+          >
+            -
+          </button>
+          <span>{{ item.quantity }}</span>
+          <button
+            data-quantity="{{ item.quantity | plus: 1 }}"
+            data-plus
+            class="quantity__button quantity-plus"
+          >
+            +
+          </button>
+        </div>
+        <button data-quantity="0" data-remove class="link cart-line-item__remove button">Remove</button>
+      </cart-actions>
+      <div class="text-right">
+        <p class="text-sm md:text-base font-semibold">
+          {{ item.final_line_price | money }}
+        </p>
+        {% if item.original_line_price > item.final_line_price %}
+          <p class="text-xs text-gray-500 line-through">
+            {{ item.original_line_price | money }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

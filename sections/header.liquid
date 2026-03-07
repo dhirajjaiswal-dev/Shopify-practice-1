@@ -1,0 +1,145 @@
+<header class="relative flex items-center justify-between p-4 md:p-8">
+  <nav class="hidden md:block" aria-label="Main navigation">
+    <ul class="flex items-center gap-8 list-none">
+      {% for link in section.settings.menu.links %}
+        <li class="relative">
+          <div class="group">
+            {% if link.links.size > 0 %}
+              <span class="flex items-center gap-1 text-inherit cursor-pointer hover:underline hover:underline-offset-4">
+                {{ link.title }}
+                {% render 'icon-chevron-down',
+                  class_name: 'w-4 h-4 transition-transform duration-200 group-hover:rotate-180'
+                %}
+              </span>
+            {% else %}
+              <a href="{{ link.url }}" class="no-underline hover:underline hover:underline-offset-4 text-inherit">
+                {{ link.title }}
+              </a>
+            {% endif %}
+            {% if link.links.size > 0 %}
+              <ul class="absolute top-full left-0 min-w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 mt-2 list-none">
+                {% for child_link in link.links %}
+                  <li>
+                    <a
+                      href="{{ child_link.url }}"
+                      class="block px-4 py-2 no-underline hover:underline hover:underline-offset-4 text-inherit"
+                    >
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <button
+    type="button"
+    class="block md:hidden bg-transparent border-none cursor-pointer p-2"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    data-menu-toggle
+  >
+    {% render 'icon-hamburger' %}
+  </button>
+
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <a href="{{ routes.root_url }}" class="block" aria-label="{{ shop.name }}">
+      {% if settings.logo != blank %}
+        {% render 'logo', class_name: 'w-auto h-10' %}
+
+      {% else %}
+        <span class="text-2xl font-bold">{{ shop.name }}</span>
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="flex items-center">
+    {% render 'cart-icon' %}
+  </div>
+
+  <nav
+    class="fixed top-0 left-0 w-4/5 max-w-sm h-full bg-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out hidden shadow-lg md:hidden"
+    data-mobile-menu
+    aria-label="Mobile navigation"
+  >
+    <div class="pt-14 px-8 overflow-y-auto h-full relative">
+      <button
+        type="button"
+        class="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 z-50"
+        aria-label="Close menu"
+        data-menu-close
+      >
+        {% render 'icon-close', color: 'black' %}
+      </button>
+      <ul class="space-y-8 list-none">
+        {% for link in section.settings.menu.links %}
+          <li>
+            {% if link.links.size > 0 %}
+              <button
+                type="button"
+                class="w-full flex items-center justify-between gap-1 text-inherit text-xl bg-transparent border-none cursor-pointer p-0 text-left"
+                aria-label="Toggle submenu for {{ link.title }}"
+                aria-expanded="false"
+                data-submenu-toggle
+              >
+                <span>{{ link.title }}</span>
+                {% render 'icon-chevron-down', class_name: 'w-4 h-4' %}
+              </button>
+            {% else %}
+              <a
+                href="{{ link.url }}"
+                class="block no-underline hover:underline hover:underline-offset-4 text-inherit text-xl"
+              >
+                {{ link.title }}
+              </a>
+            {% endif %}
+            {% if link.links.size > 0 %}
+              <ul class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out mt-2 space-y-2 list-none bg-white rounded-md py-0">
+                {% for child_link in link.links %}
+                  <li>
+                    <a
+                      href="{{ child_link.url }}"
+                      class="block px-4 py-2 no-underline hover:underline hover:underline-offset-4 text-inherit"
+                    >
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+
+  <div
+    class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"
+    data-mobile-overlay
+    aria-hidden="true"
+  ></div>
+</header>
+
+<script src="{{ 'header-javascript.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:general.header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:labels.menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,128 @@
+/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100vh;
+  height: 100%;
+  font-family: var(--font-primary--family);
+}
+
+img,
+picture,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utility classes */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-menu-link br {
+  display: none;
+}
+
+.padding-left {
+  padding-left: 0;
+}
+
+.spacing-block {
+  padding-block: 32px;
+}
+
+.spacing-block-start {
+  padding-block-start: 32px;
+}
+
+.spacing-block-end {
+  padding-block-end: 32px;
+}
+
+@media (min-width: 1024px) {
+  .padding-left {
+    padding-left: 224px !important;
+  }
+
+  .spacing-block {
+    padding-block: 50px;
+  }
+
+  .spacing-block-start {
+    padding-block-start: 50px;
+  }
+
+  .spacing-block-end {
+    padding-block-end: 50px;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Header  */
+
+.header .menu-mobile.menu-open .hamburger-line:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.header .menu-mobile.menu-open .hamburger-line:nth-child(2) {
+  transform: translateY(-2px) rotate(-45deg);
+}
+
+.header .menu-main.fade-out {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.header .menu-submenu.active {
+  position: relative;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Hide browser default clear button on search inputs */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="search"]::-moz-search-clear-button {
+  display: none;
+}
+
+.translate-x-5 {
+  --tw-translate-x: 1.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}

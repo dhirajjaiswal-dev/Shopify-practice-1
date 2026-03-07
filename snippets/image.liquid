@@ -1,0 +1,143 @@
+{% comment %}
+  Required:
+  image: The main desktop image object
+
+  Optional:
+  mobile_image: Different image for mobile (falls back to image)
+  class_name: CSS classes for styling
+  alt: Alt text (falls back to image.alt)
+  height: Image height attribute
+  lazy: Set to false for eager loading (default: lazy)
+  priority: Set to 'high' for fetchpriority="high"
+  multiplier: Width multiplier for auto-calculations (default: 1.5)
+
+  Advanced:
+  responsive_widths: Comma-separated breakpoints (e.g., "768:800,1024:1200")
+  base_width: Desktop width for legacy mode (default: 1440px)
+  mobile_width: Mobile width for legacy mode (default: 768px)
+  breakpoint: Screen size to switch mobile/desktop (default: 768px)
+{% endcomment %}
+
+{% liquid
+  assign desktop_img = image
+  assign mobile_img = mobile_image | default: image
+  assign classes = class_name | default: 'w-full h-auto'
+  assign alt = alt | default: image.alt
+  assign loading = 'lazy'
+  if lazy == false
+    assign loading = 'eager'
+  endif
+  assign fetchpriority = 'low'
+  if priority == 'high'
+    assign fetchpriority = 'high'
+  endif
+
+  # Default multiplier for auto-calculated widths
+  assign width_multiplier = multiplier | default: 1.5
+
+  # Parse responsive_widths if provided
+  assign has_responsive = false
+  if responsive_widths and responsive_widths != blank
+    assign has_responsive = true
+    assign breakpoints_array = responsive_widths | split: ','
+  endif
+%}
+
+{% if desktop_img %}
+  <picture class="{{ class_name }}">
+    {% if has_responsive %}
+      {% comment %} Get first breakpoint for mobile/desktop split {% endcomment %}
+      {% assign first_config = breakpoints_array | first | strip %}
+      {% if first_config contains ':' %}
+        {% assign parts = first_config | split: ':' %}
+        {% assign first_bp = parts[0] | strip | times: 1 %}
+        {% assign first_width = parts[1] | strip | times: 1 %}
+      {% else %}
+        {% assign first_bp = first_config | times: 1 %}
+        {% assign first_width = first_bp | times: width_multiplier | round %}
+      {% endif %}
+
+      {% comment %} Use mobile image for screens below first breakpoint if mobile_img is different {% endcomment %}
+      {% if mobile_img and mobile_img != desktop_img %}
+        <source
+          srcset="{{ mobile_img | image_url: width: first_width }}"
+          media="(max-width: {{ first_bp | minus: 1 }}px)"
+        >
+      {% endif %}
+
+      {% comment %} Generate sources from responsive_widths for desktop {% endcomment %}
+      {% for breakpoint_config in breakpoints_array reversed %}
+        {% assign breakpoint_config = breakpoint_config | strip %}
+
+        {% if breakpoint_config contains ':' %}
+          {% comment %} Format: "768:800" - explicit breakpoint:width {% endcomment %}
+          {% assign parts = breakpoint_config | split: ':' %}
+          {% assign bp_size = parts[0] | strip | times: 1 %}
+          {% assign img_width = parts[1] | strip | times: 1 %}
+        {% else %}
+          {% comment %} Format: "768" - auto-calculate width {% endcomment %}
+          {% assign bp_size = breakpoint_config | times: 1 %}
+          {% assign img_width = bp_size | times: width_multiplier | round %}
+        {% endif %}
+
+        <source
+          srcset="{{ desktop_img | image_url: width: img_width }}"
+          media="(min-width: {{ bp_size }}px)"
+        >
+      {% endfor %}
+
+      {% comment %} Default fallback source for smallest screens {% endcomment %}
+      {% assign rendered_width = first_width %}
+
+      {% comment %} Determine which image to use for fallback img tag {% endcomment %}
+      {% if mobile_img and mobile_img != desktop_img %}
+        {% assign fallback_img = mobile_img %}
+      {% else %}
+        {% assign fallback_img = desktop_img %}
+      {% endif %}
+
+    {% else %}
+      {% comment %} Legacy behavior with desktop/mobile images {% endcomment %}
+      {% assign desktop_w = base_width | default: 1440 %}
+      {% assign mobile_w = mobile_width | default: 768 %}
+      {% assign bp = breakpoint | default: 768 %}
+
+      <source
+        srcset="{{ desktop_img | image_url: width: desktop_w }}"
+        media="(min-width: {{ bp }}px)"
+      >
+      {% if mobile_img and mobile_img != desktop_img %}
+        <source
+          srcset="{{ mobile_img | image_url: width: mobile_w }}"
+          media="(max-width: {{ bp | minus: 1 }}px)"
+        >
+      {% endif %}
+
+      {% assign rendered_width = desktop_w %}
+    {% endif %}
+
+    {% comment %}
+      image_url is the correct filter for Shopify images (not asset_url)
+      asset_url is only for static files in /assets folder
+      image_url is for uploaded images in Shopify admin
+    {% endcomment %}
+    {% liquid
+      if has_responsive and fallback_img
+        assign img_src = fallback_img | image_url: width: rendered_width
+      elsif mobile_img and mobile_img != desktop_img
+        assign img_src = mobile_img | image_url: width: rendered_width
+      else
+        assign img_src = desktop_img | image_url: width: rendered_width
+      endif
+    %}
+    <img
+      src="{{ img_src }}"
+      alt="{{ alt }}"
+      width="{{ rendered_width }}"
+      height="{{ height }}"
+      loading="{{ loading }}"
+      fetchpriority="{{ fetchpriority }}"
+      class="{{ classes }}"
+    >
+  </picture>
+{% endif %}

@@ -1,0 +1,12 @@
+<product-form class="product-form">
+  <form action="{{ routes.cart_add_url }}" method="post">
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <input type="hidden" name="quantity" value="1">
+    <button
+      type="submit"
+      class="btn btn-primary w-full bg-black text-white py-3 rounded-full text-base font-medium hover:bg-gray-800 transition-colors"
+    >
+      Add to Cart
+    </button>
+  </form>
+</product-form>

@@ -1,0 +1,78 @@
+<footer class="footer relative overflow-hidden bg-black">
+  <div class="footer__background">
+    {% render 'image',
+      image: section.settings.footer_desktop_background,
+      mobile_image: section.settings.footer_mobile_background,
+      alt: 'Footer Background',
+      width: '1440',
+      height: '500'
+    %}
+  </div>
+  <div class="footer__content flex flex-col justify-between w-full h-full py-6 px-4 lg:p-20">
+    <div class="footer__content-container flex flex-col gap-10 lg:gap-36 lg:flex-row justify-between pb-5">
+      <div class="footer__content-logo-container flex-1">
+        {% render 'logo', class_name: 'w-auto h-10', color: 'white', background: '#000' %}
+      </div>
+      <div class="footer__content-menu-container flex-[2]">
+        <ul class="footer__content-menu-list flex flex-col gap-8 lg:flex-row lg:gap-4">
+          {% for link in section.settings.menu.links %}
+            <li class="footer__content-menu-item flex-1">
+              <a
+                href="{{ link.url }}"
+                class="footer__content-menu-link text-white text-sm font-light lg:opacity-80 uppercase pb-2 lg:pb-3 no-underline hover:underline hover:underline-offset-4"
+              >
+                {{- link.title -}}
+              </a>
+              {% if link.links.size > 0 %}
+                <ul class="footer__content-menu-submenu-list flex flex-col gap-2 lg:gap-3">
+                  {% for child_link in link.links %}
+                    <li class="footer__content-menu-submenu-item leading-3">
+                      <a
+                        href="{{ child_link.url }}"
+                        class="footer__content-menu-submenu-link text-white text-sm leading-normal lg:text-base font-light opacity-70 uppercase lg:opacity-100"
+                      >
+                        {{- child_link.title -}}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="footer__content-copyright-container text-white text-base font-light pt-4 border-t-[1px] border-white opacity-70">
+      {{ section.settings.footer_copyright_text }}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "t:general.footer",
+  "class": "footer-section spacing-block-start",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:labels.menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_desktop_background",
+      "label": "Footer Desktop Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_mobile_background",
+      "label": "Footer Mobile Background"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_copyright_text",
+      "label": "Footer Copyright Text"
+    }
+  ]
+}
+{% endschema %}

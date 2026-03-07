@@ -1,0 +1,53 @@
+<section class="relative w-full overflow-hidden">
+  <div class="relative w-full h-[60vh] min-h-[400px] md:h-[80vh] md:min-h-[600px]">
+    <picture class="absolute inset-0 w-full h-full">
+      <source
+        srcset="https://foxtale-ai.myshopify.com/cdn/shop/files/Android_Pop_Up_Banner.png?v=1765610143&width=768"
+        media="(max-width: 767px)"
+      >
+      <source
+        srcset="https://foxtale-ai.myshopify.com/cdn/shop/files/MOBILE_12.webp?v=1765610142&width=1920"
+        media="(min-width: 768px)"
+      >
+      <img
+        src="https://foxtale-ai.myshopify.com/cdn/shop/files/MOBILE_12.webp?v=1765610142&width=1920"
+        alt="Hero banner"
+        class="absolute inset-0 w-full h-full object-cover"
+        width="1920"
+        height="1080"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </picture>
+
+    <div class="absolute inset-0 bg-black opacity-30" aria-hidden="true"></div>
+
+    <div class="relative z-10 h-full flex items-center justify-center px-4 md:px-8 lg:px-16">
+      <div class="w-full max-w-4xl mx-auto text-center">
+        {% if section.settings.heading != blank %}
+          <div class="text-white drop-shadow-lg text-4xl md:text-5xl lg:text-6xl">
+            {{ section.settings.heading }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

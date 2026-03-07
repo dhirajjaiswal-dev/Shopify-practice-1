@@ -1,0 +1,44 @@
+{%- assign preload_value = preload | default: 'none' -%}
+
+{%- assign loading_value = loading | default: 'lazy' -%}
+{%- assign is_lazy = false -%}
+{% if loading_value == 'lazy' %}
+  {%- assign is_lazy = true -%}
+{% endif %}
+
+{% unless poster contains 'https' %}
+  {% assign poster = poster | default: video_url.preview_image.src %}
+  {% assign poster = poster | image_url: width: 500 %}
+{% endunless %}
+
+{%- unless video_url contains 'http' -%}
+  {%- assign video_url = video_url.sources.last.url | prepend: 'https:' -%}
+{%- endunless -%}
+
+<video
+  preload="{{ preload_value }}"
+  {% unless is_lazy %}
+    fetchpriority="high"
+  {% endunless %}
+  {% if id %}
+    id="{{ id }}"
+  {% endif %}
+  class="{% if is_lazy %}lazy-video{% endif %} {{ class_name }}"
+  loop
+  muted
+  playsinline
+  autoplay
+  poster="{{ poster }}"
+  {% if height %}
+    height="{{ height }}"
+  {% endif %}
+  {% if width %}
+    width="{{ width }}"
+  {% endif %}
+>
+  {% if is_lazy %}
+    <source data-src="{{ video_url }}" type="video/mp4">
+  {% else %}
+    <source src="{{ video_url }}" type="video/mp4" fetchpriority="high">
+  {% endif %}
+</video>
