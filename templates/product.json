@@ -12,9 +12,235 @@
     "main": {
       "type": "product",
       "settings": {}
+    },
+    "feature_marquee_BjJtfE": {
+      "type": "feature-marquee",
+      "blocks": {
+        "item_JGDLJt": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        },
+        "item_MMXYna": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        },
+        "item_8eMGc8": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        },
+        "item_ACppVf": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        }
+      },
+      "block_order": [
+        "item_JGDLJt",
+        "item_MMXYna",
+        "item_8eMGc8",
+        "item_ACppVf"
+      ],
+      "name": "Feature Marquee",
+      "settings": {
+        "bg_color": "#EC2C86",
+        "text_color": "#ffffff",
+        "speed": 30
+      }
+    },
+    "testimonial_cards_wJxKCB": {
+      "type": "testimonial-cards",
+      "blocks": {
+        "testimonial_4jhRXe": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        },
+        "testimonial_eXUQk6": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        },
+        "testimonial_9kJJrE": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "rating": 4,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_4jhRXe",
+        "testimonial_eXUQk6",
+        "testimonial_9kJJrE"
+      ],
+      "name": "Testimonial Cards",
+      "settings": {}
+    },
+    "customer_reactions_y6BBbe": {
+      "type": "customer-reactions",
+      "blocks": {
+        "review_RANiCd": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        },
+        "review_zmrzbf": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_6.png",
+            "video": ""
+          }
+        },
+        "review_axdpbA": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_5.png",
+            "video": ""
+          }
+        },
+        "review_MdCxek": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_RANiCd",
+        "review_zmrzbf",
+        "review_axdpbA",
+        "review_MdCxek"
+      ],
+      "name": "Customer Review Slider",
+      "settings": {
+        "heading": "Customer Reviews"
+      }
+    },
+    "product_description_blocks_GUeihL": {
+      "type": "product-description-blocks",
+      "blocks": {
+        "paragraph_86PRVh": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Add Wellie Bellie Bites are expertly formulated to support your dog’s gut health. If you’ve noticed tear stains in their eyes, a dull coat, your dog scratching itself, licking its paws, or just bad breath that doesn’t seem to go away - the Bellie Bites are the answer to these common issues.  \nyour product description text here."
+          }
+        },
+        "paragraph_9JcWhG": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Our premium supplements are designed to optimize digestive health, enhance immune function, and improve overall well-being. Powered by a scientifically developed blend of prebiotics, probiotics, and digestive enzymes, each treat delivers targeted benefits for a healthier, happier pet. "
+          }
+        },
+        "paragraph_XWmrtr": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Each of these bites comes with 4 billion CFUs - that’s 4 Billion clinically approved live strains to help your dog build good bacteria and defend against allergies."
+          }
+        }
+      },
+      "block_order": [
+        "paragraph_86PRVh",
+        "paragraph_9JcWhG",
+        "paragraph_XWmrtr"
+      ],
+      "name": "Product Description",
+      "settings": {
+        "heading": "Description"
+      }
+    },
+    "premium_ingredients_qE66Mh": {
+      "type": "premium-ingredients",
+      "blocks": {
+        "ingredient_KwqwBU": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_qBxYqH": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_1.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_kAhhXR": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_2.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_exfJgk": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_5.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_KwqwBU",
+        "ingredient_qBxYqH",
+        "ingredient_kAhhXR",
+        "ingredient_exfJgk"
+      ],
+      "name": "Premium Ingredients",
+      "settings": {
+        "heading": "Premium Ingredients"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "feature_marquee_BjJtfE",
+    "testimonial_cards_wJxKCB",
+    "customer_reactions_y6BBbe",
+    "product_description_blocks_GUeihL",
+    "premium_ingredients_qE66Mh"
   ]
 }
