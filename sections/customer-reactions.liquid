@@ -7,12 +7,12 @@
     <!-- Left Arrow -->
     <button
       type="button"
-      onclick="slideReviews(-1)"
+      data-slide-prev
       class="
         absolute left-0 top-1/2 -translate-y-1/2 z-10
         bg-white/90 hover:bg-white
         w-10 h-10 rounded-full shadow
-        flex items-center justify-center
+        hidden sm:flex items-center justify-center
       "
     >
       ‹
@@ -21,12 +21,12 @@
     <!-- Right Arrow -->
     <button
       type="button"
-      onclick="slideReviews(1)"
+      data-slide-next
       class="
         absolute right-0 top-1/2 -translate-y-1/2 z-10
         bg-white/90 hover:bg-white
         w-10 h-10 rounded-full shadow
-        flex items-center justify-center
+        hidden sm:flex items-center justify-center
       "
     >
       ›
@@ -35,7 +35,8 @@
     <!-- Slider -->
     <div
       id="reviewSlider"
-      class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-12"
+      data-review-slider
+      class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-8 md:px-12"
     >
       {% for block in section.blocks %}
         <div
@@ -83,16 +84,7 @@
   }
 </style>
 
-<script>
-  function slideReviews(direction) {
-    const slider = document.getElementById('reviewSlider');
-    const cardWidth = 260;
-    slider.scrollBy({
-      left: direction * cardWidth,
-      behavior: 'smooth',
-    });
-  }
-</script>
+<script src="{{ 'review-slider.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
