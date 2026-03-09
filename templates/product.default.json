@@ -13,57 +13,136 @@
       "type": "product",
       "settings": {}
     },
-    "benefits_feel_LceQAn": {
-      "type": "benefits-feel",
+    "feature_marquee_JwTNFL": {
+      "type": "feature-marquee",
       "blocks": {
-        "benefit_VVeLTT": {
-          "type": "benefit",
+        "item_PbTUCk": {
+          "type": "item",
           "settings": {
-            "number": "1",
-            "title": "Supports Digestive Health",
-            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
           }
         },
-        "benefit_E6Kix6": {
-          "type": "benefit",
+        "item_dCNmfc": {
+          "type": "item",
           "settings": {
-            "number": "1",
-            "title": "Supports Digestive Health",
-            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
           }
         },
-        "benefit_BrbMyB": {
-          "type": "benefit",
+        "item_VEipkB": {
+          "type": "item",
           "settings": {
-            "number": "1",
-            "title": "Supports Digestive Health",
-            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
-          }
-        },
-        "benefit_erYqMa": {
-          "type": "benefit",
-          "settings": {
-            "number": "1",
-            "title": "Supports Digestive Health",
-            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
           }
         }
       },
       "block_order": [
-        "benefit_VVeLTT",
-        "benefit_E6Kix6",
-        "benefit_BrbMyB",
-        "benefit_erYqMa"
+        "item_PbTUCk",
+        "item_dCNmfc",
+        "item_VEipkB"
       ],
-      "name": "Benefits – Pet Can Feel",
+      "name": "Feature Marquee",
       "settings": {
-        "heading": "Benefits your pet can feel.",
-        "bg_color": "#EC2C86"
+        "bg_color": "#EC2C86",
+        "text_color": "#ffffff",
+        "speed": 30
+      }
+    },
+    "testimonial_cards_KzNJ48": {
+      "type": "testimonial-cards",
+      "blocks": {
+        "testimonial_pGJedA": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "quote_icon": "shopify://shop_images/da21dde662a19a4b8a6e17048660983a.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        },
+        "testimonial_MhpXAQ": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "quote_icon": "shopify://shop_images/da21dde662a19a4b8a6e17048660983a.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        },
+        "testimonial_McHiYm": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "quote_icon": "shopify://shop_images/da21dde662a19a4b8a6e17048660983a.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_pGJedA",
+        "testimonial_MhpXAQ",
+        "testimonial_McHiYm"
+      ],
+      "name": "Testimonial Cards",
+      "settings": {}
+    },
+    "customer_reactions_tcAGk9": {
+      "type": "customer-reactions",
+      "blocks": {
+        "review_k9tAKP": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        },
+        "review_FNrriH": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_6.png",
+            "video": ""
+          }
+        },
+        "review_QnjfUQ": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_5.png",
+            "video": ""
+          }
+        },
+        "review_ewgtFC": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_k9tAKP",
+        "review_FNrriH",
+        "review_QnjfUQ",
+        "review_ewgtFC"
+      ],
+      "name": "Customer Review Slider",
+      "settings": {
+        "heading": "Customer Reviews"
       }
     }
   },
   "order": [
     "main",
-    "benefits_feel_LceQAn"
+    "feature_marquee_JwTNFL",
+    "testimonial_cards_KzNJ48",
+    "customer_reactions_tcAGk9"
   ]
 }
