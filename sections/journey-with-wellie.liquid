@@ -1,18 +1,18 @@
-<section class="max-w-7xl mx-auto px-20 py-7">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<section class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-7">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-start">
     <!-- LEFT CONTENT -->
     <div>
-      <h2 class="text-3xl text-center font-semibold text-gray-800 mb-10">
+      <h2 class="text-xl md:text-2xl lg:text-3xl text-center font-semibold text-gray-800 mb-6 md:mb-10">
         {{ section.settings.heading }}
       </h2>
 
       <div class="relative">
         <!-- Vertical line -->
-        <div class="absolute text-center left-8 top-0 h-full w-px bg-dashed border-l border-gray-300"></div>
+        <div class="absolute text-center left-4 md:left-8 top-0 h-full w-px bg-dashed border-l border-gray-300"></div>
 
-        <div class="space-y-12">
+        <div class="space-y-6 md:space-y-12">
           {% for block in section.blocks %}
-            <div class="relative pl-14">
+            <div class="relative pl-10 md:pl-14">
               <!-- Month badge -->
               <span class="absolute left-0 top-0 inline-flex items-center justify-center rounded-full border border-teal-500 text-teal-600 text-xs font-medium px-3 py-1 bg-white">
                 {{ block.settings.month }}
@@ -22,7 +22,7 @@
                 {{ block.settings.title }}
               </h3>
 
-              <ul class="list-disc text-left pl-16 space-y-2 text-gray-600 text-sm">
+              <ul class="list-disc text-left pl-10 md:pl-16 space-y-2 text-gray-600 text-sm">
                 {% assign lines = block.settings.points | newline_to_br | split: '<br />' %}
                 {% for line in lines %}
                   <li>{{ line }}</li>
