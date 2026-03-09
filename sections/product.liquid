@@ -1,13 +1,302 @@
-<div class="w-full px-8">
-  <h1 class="text-2xl font-bold text-center">{{ product.title }}</h1>
-</div>
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- LEFT: PRODUCT IMAGES -->
+    <div class="space-y-4">
+      {% if product.images.size > 0 %}
+        <!-- MAIN IMAGE SLIDER -->
+        <div class="relative overflow-hidden rounded-2xl">
+          {% for image in product.images %}
+            <img
+              src="{{ image | image_url: width: 1000 }}"
+              alt="{{ product.title }}"
+              class="product-slide w-full object-cover transition-opacity duration-300 {% if forloop.first %}opacity-100{% else %}opacity-0 absolute inset-0{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              width="1000"
+              height="1000"
+              loading="eager"
+            >
+          {% endfor %}
 
-{% schema %}
-{
-  "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
-}
-{% endschema %}
+          <!-- LEFT ARROW -->
+          <button
+            type="button"
+            class="absolute left-4 top-1/2 -translate-y-1/2 bg-pink-700 p-2 rounded-full"
+            onclick="prevImage()"
+          >
+            ‹
+          </button>
+
+          <!-- RIGHT ARROW -->
+          <button
+            type="button"
+            class="absolute right-4 top-1/2 -translate-y-1/2 bg-pink-700 p-2 rounded-full"
+            onclick="nextImage()"
+          >
+            ›
+          </button>
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="flex gap-3 mt-4">
+          {% for image in product.images %}
+            <img
+              src="{{ image | image_url: width: 200 }}"
+              alt="{{ product.title }}"
+              class="w-20 h-20 rounded-xl object-cover cursor-pointer border hover:border-black"
+              onclick="goToImage({{ forloop.index0 }})"
+              width="20"
+              height="20"
+              loading="eager"
+            >
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="space-y-6">
+      <div class="flex items-center gap-4 justify-between">
+        {% if product.metafields.custom.product_tagline != blank %}
+          <span
+            class="
+              inline-flex
+              items-center
+              bg-[#FF2B8B]
+              text-white
+              text-xs
+              font-semibold
+              px-4
+              py-1.5
+              rounded-full
+              leading-none
+            "
+          >
+            {{ product.metafields.custom.product_tagline }}
+          </span>
+        {% endif %}
+
+        <!-- Rating -->
+        <div class="flex items-center gap-1 text-[#025A60] text-sm font-semibold">
+          <!-- Star Icon -->
+          <svg
+            class="w-4 h-4 fill-[#FFC107]"
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+          >
+            <path d="M10 1.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L10 1.5z"/>
+          </svg>
+
+          <span>4.4</span>
+          <span class="text-[#025A60]/70">(1,900+ Reviews)</span>
+        </div>
+      </div>
+
+      <!-- Title -->
+
+      <h1
+        class="
+          font-['Fredoka']
+          font-black
+          text-[32px]
+          md:text-[44px]
+          leading-[1.05]
+          tracking-tight
+        "
+      >
+        {{ product.title }}
+      </h1>
+
+      <!-- Price -->
+      <div class="flex items-center gap-4 m-0 p-0">
+        <span class="text-2xl font-semibold text-gray-900">
+          {{ product.price | money }}
+        </span>
+
+        {% if product.compare_at_price > product.price %}
+          <span class="text-gray-400 line-through">
+            {{ product.compare_at_price | money }}
+          </span>
+        {% endif %}
+      </div>
+      <div class="text-gray-900 p-0 m-0">MRP Inclusive of all taxes</div>
+
+      {% comment %} ////////////////////////////////////////////////////// {% endcomment %}
+
+      {% comment %} Product Form {% endcomment %}
+
+      {% form 'product', product, class: 'space-y-6' %}
+        {% comment %} Variant Options {% endcomment %}
+        {% for option in product.options_with_values %}
+          <div>
+            {% assign product_benefits = product.metafields.custom.product_benefits.value %}
+            {% if product_benefits != blank %}
+              <div class="mt-2 pt-2 max-w-md">
+                {% comment %} <h2 class="text-2xl font-bold text-gray-900 mb-6">Product Benefits</h2> {% endcomment %}
+
+                <div
+                  class="
+                    flex
+                    items-start
+                    gap-4
+                    bg-[#FFE4EF]
+                    border
+                    border-[#FF2B8B]
+                    rounded-xl
+                    p-2
+                  "
+                >
+                  <!-- Icon -->
+                  {% if product_benefits.image != blank %}
+                    <img
+                      src="{{ product_benefits.image | image_url: width: 80 }}"
+                      alt="Product benefit icon"
+                      class="w-10 h-10 object-contain flex-shrink-0"
+                      width="30"
+                      height="30"
+                    >
+                  {% endif %}
+
+                  <!-- Text -->
+                  <div class="space-y-1 text-sm">
+                    <!-- Title -->
+                    <p class="text-sm font-semibold text-gray-900">
+                      {{ product_benefits.title }}
+                    </p>
+
+                    <!-- Disclaimer -->
+                    <p class="text-xs text-gray-600 leading-loose">
+                      {{ product_benefits.details | metafield_tag }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% comment %} <label class="block text-sm leading-loose font-medium pb-4 pt-4"> {{ option.name }} </label> {% endcomment %}
+
+            {% comment %} <div class="flex flex-nowrap gap-3 overflow-x-auto"> {% endcomment %}
+          </div>
+        {% endfor %}
+      {% endform %}
+
+      {% comment %} /////////////////////////////////////////////////////// {% endcomment %}
+
+      {% form 'product', product, class: 'space-y-6', id: 'ProductForm' %}
+        <!-- This is what Shopify actually submits -->
+        <input
+          type="hidden"
+          name="id"
+          id="SelectedVariantId"
+          value="{{ product.selected_or_first_available_variant.id }}"
+        >
+
+        <!-- VARIANT OPTIONS -->
+        {% for option in product.options_with_values %}
+          <div>
+            <label class="block text-sm font-medium pb-4 pt-4">
+              {{ option.name }}
+            </label>
+
+            <div class="flex flex-wrap gap-4">
+              {% for value in option.values %}
+                <label class="cursor-pointer">
+                  <input
+                    type="radio"
+                    class="peer hidden variant-option"
+                    name="option-{{ option.position }}"
+                    value="{{ value }}"
+                    {% if forloop.first %}
+                      checked
+                    {% endif %}
+                  >
+                  <span
+                    class="
+                      px-4 py-3 rounded-full border
+                      bg-[#025A60]/[0.08] text-[#025A60]
+                      text-sm whitespace-nowrap
+                      peer-checked:bg-teal-700
+                      peer-checked:text-white
+                      peer-checked:border-teal-700
+                    "
+                  >
+                    {{ value }}
+                  </span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <!-- QUANTITY -->
+        <div class="flex items-center gap-4 pt-8">
+          <div class="flex items-center border rounded-xl border-[#025A60] p-1">
+            <button type="button" class="qty-minus px-3 py-2 bg-[#025A60]/[0.08] text-[#025A60] rounded-xl">−</button>
+
+            <input
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              class="qty-input w-12 text-center outline-none bg-transparent"
+            >
+
+            <button type="button" class="qty-plus px-3 py-2 bg-[#025A60]/[0.08] text-[#025A60] rounded-xl">+</button>
+          </div>
+
+          <button
+            type="submit"
+            class="flex-1 bg-teal-800 text-white py-4 rounded-xl font-semibold hover:bg-teal-900 transition"
+          >
+            Add to cart
+          </button>
+        </div>
+      {% endform %}
+
+      {% assign voucher = product.metafields.custom.voucher.value %}
+
+      {% if voucher %}
+        <div class="grid grid-cols-2 gap-4">
+          {% for voucher in voucher %}
+            <div
+              class="
+                flex items-center gap-2 rounded-xl border border-dashed border-gray-300 bg-[#025A60]/[0.08]
+                text-[#025A60] p-4 max-w-md
+              "
+            >
+              <img
+                src="{{ voucher.voucher_image | image_url: width: 200 }}"
+                class="h-10 w-10 object-contain object-center"
+                width="20"
+                height="20"
+              >
+
+              <div class="flex-1 text-[#025A60] font-semibold">
+                <h3 class="text-sm font-semibold">{{ voucher.voucher_title }}</h3>
+                <p class="text-xs ">{{ voucher.voucher_description }}</p>
+              </div>
+
+              <a
+                href="{{ voucher.voucher_copy_image.url }}"
+                class="rounded-lg px-1 py-1.5 h-10 w-10 object-contain object-center"
+              >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/File.png?v=1768355583"
+                  alt="Copy"
+                  width="30"
+                  height="30"
+                >
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+<script type="application/json" id="product-variants-json">
+  {{ product.variants | json }}
+</script>
+
+<script src="{{ 'image-slider.js' | asset_url }}" defer></script>
+<script src="{{ 'quantity-logic.js' | asset_url }}" defer></script>

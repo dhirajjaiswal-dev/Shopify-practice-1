@@ -1,0 +1,133 @@
+<h2 class="text-3xl font-semibold mb-3 text-center text-gray-900 pt-8">Love at First Bite</h2>
+<p class="text-center text-gray-600">Real dogs. Real reactions. Zero convincing required.</p>
+
+<section class="max-w-7xl mx-auto px-20 py-10">
+  <!-- Slider Wrapper -->
+  <div class="relative">
+    <!-- Left Arrow -->
+    <button
+      type="button"
+      onclick="slideReviews(-1)"
+      class="
+        absolute left-0 top-1/2 -translate-y-1/2 z-10
+        bg-white/90 hover:bg-white
+        w-10 h-10 rounded-full shadow
+        flex items-center justify-center
+      "
+    >
+      ‹
+    </button>
+
+    <!-- Right Arrow -->
+    <button
+      type="button"
+      onclick="slideReviews(1)"
+      class="
+        absolute right-0 top-1/2 -translate-y-1/2 z-10
+        bg-white/90 hover:bg-white
+        w-10 h-10 rounded-full shadow
+        flex items-center justify-center
+      "
+    >
+      ›
+    </button>
+
+    <!-- Slider -->
+    <div
+      id="reviewSlider"
+      class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-12"
+    >
+      {% for block in section.blocks %}
+        <div
+          class="
+            min-w-[240px] max-w-[240px] h-[420px]
+            rounded-2xl overflow-hidden
+            bg-black relative flex-shrink-0
+          "
+        >
+          {% if block.settings.video != blank %}
+            <video
+              class="w-full h-full object-cover"
+              autoplay
+              muted
+              loop
+              playsinline
+            >
+              <source src="{{ block.settings.video }}" type="video/mp4">
+            </video>
+
+            <!-- Play Icon -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/50 w-12 h-12 rounded-full flex items-center justify-center text-white">▶</div>
+            </div>
+
+          {% elsif block.settings.image != blank %}
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              class="w-full h-full object-cover"
+              loading="lazy"
+              alt=""
+              width="240"
+              height="420"
+            >
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function slideReviews(direction) {
+    const slider = document.getElementById('reviewSlider');
+    const cardWidth = 260;
+    slider.scrollBy({
+      left: direction * cardWidth,
+      behavior: 'smooth',
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Customer Review Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Customer Reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Review image"
+        },
+        {
+          "type": "url",
+          "id": "video",
+          "label": "Video URL (MP4)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Review Slider",
+      "blocks": [{ "type": "review" }, { "type": "review" }, { "type": "review" }, { "type": "review" }]
+    }
+  ]
+}
+{% endschema %}

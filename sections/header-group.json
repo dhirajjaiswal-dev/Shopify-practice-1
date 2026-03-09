@@ -11,12 +11,38 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement_bar_FBhmLQ": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "heading": "<p>15% Off over ₹5000 Use Code WELLIEWOW</p>"
+      }
+    },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "custom_section_9MwC8N": {
+      "type": "custom-section",
+      "name": "t:general.custom_section",
+      "settings": {}
+    },
+    "header1_3c9x8i": {
+      "type": "header1",
+      "name": "Custom Header",
+      "settings": {
+        "logo": "shopify://shop_images/Vector.png",
         "menu": "main-menu"
       }
     }
   },
-  "order": ["header"]
+  "order": [
+    "announcement_bar_FBhmLQ",
+    "header",
+    "custom_section_9MwC8N",
+    "header1_3c9x8i"
+  ]
 }

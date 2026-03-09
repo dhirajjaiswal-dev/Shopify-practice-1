@@ -1,53 +1,86 @@
-<section class="relative w-full overflow-hidden">
-  <div class="relative w-full h-[60vh] min-h-[400px] md:h-[80vh] md:min-h-[600px]">
-    <picture class="absolute inset-0 w-full h-full">
-      <source
-        srcset="https://foxtale-ai.myshopify.com/cdn/shop/files/Android_Pop_Up_Banner.png?v=1765610143&width=768"
-        media="(max-width: 767px)"
-      >
-      <source
-        srcset="https://foxtale-ai.myshopify.com/cdn/shop/files/MOBILE_12.webp?v=1765610142&width=1920"
-        media="(min-width: 768px)"
-      >
-      <img
-        src="https://foxtale-ai.myshopify.com/cdn/shop/files/MOBILE_12.webp?v=1765610142&width=1920"
-        alt="Hero banner"
-        class="absolute inset-0 w-full h-full object-cover"
-        width="1920"
-        height="1080"
-        loading="eager"
-        fetchpriority="high"
-      >
-    </picture>
+{% comment %}
+  <section class="w-full overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center min-h-[60vh] md:min-h-[80vh] gap-8">
+        <!-- LEFT: Product Image -->
+        <div class="w-full h-full flex items-center justify-center">
+          {% if section.settings.image != blank %}
+            <img
+              src="{{ section.settings.image | image_url: width: 900 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              class="w-full h-auto object-contain"
+              width="900"
+              height="900"
+              loading="eager"
+            >
+          {% endif %}
+        </div>
 
-    <div class="absolute inset-0 bg-black opacity-30" aria-hidden="true"></div>
+        <!-- RIGHT: Text Content -->
+        <div class="text-left">
+          {% if section.settings.heading != blank %}
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              {{ section.settings.heading }}
+            </h1>
+          {% endif %}
 
-    <div class="relative z-10 h-full flex items-center justify-center px-4 md:px-8 lg:px-16">
-      <div class="w-full max-w-4xl mx-auto text-center">
-        {% if section.settings.heading != blank %}
-          <div class="text-white drop-shadow-lg text-4xl md:text-5xl lg:text-6xl">
-            {{ section.settings.heading }}
-          </div>
-        {% endif %}
+          {% if section.settings.subheading != blank %}
+            <div class="text-lg md:text-xl mb-6 text-gray-600">
+              {{ section.settings.subheading }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.button_label != blank %}
+            <a
+              href="{{ section.settings.button_link }}"
+              class="inline-block bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition"
+            >
+              {{ section.settings.button_label }}
+            </a>
+          {% endif %}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-{% schema %}
-{
-  "name": "Hero Banner",
-  "settings": [
-    {
-      "type": "richtext",
-      "id": "heading",
-      "label": "Heading"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Hero Banner"
-    }
-  ]
-}
-{% endschema %}
+  {% schema %}
+  {
+    "name": "Hero Banner (Split)",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Product Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Your Product Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "<p>Short product description goes here</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button Label",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Banner Split"
+      }
+    ]
+  }
+  {% endschema %}
+{% endcomment %}

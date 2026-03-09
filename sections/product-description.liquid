@@ -1,0 +1,32 @@
+{% if product.description != blank %}
+  <section class="max-w-7xl mx-auto px-6 pb-12">
+    <div class="border border-[#025A60] rounded-2xl p-6">
+      <h2 class="text-lg font-bold text-gray-900 mb-3">{{ section.settings.heading }}</h2>
+      <hr class="border-gray-200 mb-4">
+      <div class="text-gray-700 text-sm leading-relaxed">
+        {{ product.description }}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product Description",
+  "limit": 1,
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Description"
+    }
+  ]
+}
+{% endschema %}
