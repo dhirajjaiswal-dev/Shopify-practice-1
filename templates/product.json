@@ -233,6 +233,160 @@
       "settings": {
         "heading": "Premium Ingredients"
       }
+    },
+    "feeding_guide_j6Ljip": {
+      "type": "feeding-guide",
+      "blocks": {
+        "row_M4NUEX": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_E4MDhA": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_qxfYLC": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_JUDhVG": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        }
+      },
+      "block_order": [
+        "row_M4NUEX",
+        "row_E4MDhA",
+        "row_qxfYLC",
+        "row_JUDhVG"
+      ],
+      "name": "Feeding Guide",
+      "settings": {
+        "image": "shopify://shop_images/2150930449_1.png",
+        "heading": "Feeding guide"
+      }
+    },
+    "benefits_feel_tiiwar": {
+      "type": "benefits-feel",
+      "blocks": {
+        "benefit_CzTB4N": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_XKtd8a": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_DEYwGw": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_g3gN4N": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_CzTB4N",
+        "benefit_XKtd8a",
+        "benefit_DEYwGw",
+        "benefit_g3gN4N"
+      ],
+      "name": "Benefits – Pet Can Feel",
+      "settings": {
+        "heading": "Benefits your pet can feel.",
+        "bg_color": "#EC2C86"
+      }
+    },
+    "journey_with_wellie_WDhqd6": {
+      "type": "journey-with-wellie",
+      "blocks": {
+        "step_mjXak4": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        },
+        "step_XTpmwV": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        },
+        "step_h7q3JX": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        }
+      },
+      "block_order": [
+        "step_mjXak4",
+        "step_XTpmwV",
+        "step_h7q3JX"
+      ],
+      "name": "Journey With Wellie",
+      "settings": {
+        "heading": "Start Your Journey With Wellie",
+        "side_image": "shopify://shop_images/2150930449_1_1.png"
+      }
+    },
+    "bestseller_bundles_qGfDYj": {
+      "type": "bestseller-bundles",
+      "name": "Bestseller Bundles",
+      "settings": {
+        "heading": "Wellie Bestseller Bundles",
+        "collection": "wellie-best-seller"
+      }
+    },
+    "check_with_my_vet_MwPbJF": {
+      "type": "check-with-my-vet",
+      "name": "Check with my vet",
+      "settings": {
+        "image": "shopify://shop_images/close-up-veterinarian-taking-care-dog_1.png",
+        "heading": "Check with my vet",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "button_text": "Copy Message",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -241,6 +395,11 @@
     "testimonial_cards_wJxKCB",
     "customer_reactions_y6BBbe",
     "product_description_blocks_GUeihL",
-    "premium_ingredients_qE66Mh"
+    "premium_ingredients_qE66Mh",
+    "feeding_guide_j6Ljip",
+    "benefits_feel_tiiwar",
+    "journey_with_wellie_WDhqd6",
+    "bestseller_bundles_qGfDYj",
+    "check_with_my_vet_MwPbJF"
   ]
 }
