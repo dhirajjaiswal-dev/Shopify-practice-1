@@ -14,6 +14,46 @@
       "name": "Hero Banner",
       "settings": {}
     },
+    "feature_marquee_home": {
+      "type": "feature-marquee",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Vet Approved"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Targets Root Cause"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4"],
+      "name": "Feature Marquee",
+      "settings": {
+        "bg_color": "#EC2C86",
+        "text_color": "#ffffff",
+        "speed": 30
+      }
+    },
     "product_grid_99YYr7": {
       "type": "product-grid",
       "name": "Product Grid",
@@ -21,10 +61,289 @@
         "heading": "Featured products",
         "products_limit": 12
       }
+    },
+    "testimonial_cards_home": {
+      "type": "testimonial-cards",
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "rating": 5,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_3463981.png",
+            "rating": 4,
+            "text": "My indie is super picky and she LOVES these Bellie Bites by Wellie. Her breath smells fresher!",
+            "avatar": "shopify://shop_images/Group_4116.png",
+            "author": "Mr. Marc John"
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"],
+      "name": "Testimonial Cards",
+      "settings": {}
+    },
+    "customer_reactions_home": {
+      "type": "customer-reactions",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_6.png",
+            "video": ""
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_5.png",
+            "video": ""
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        }
+      },
+      "block_order": ["review_1", "review_2", "review_3", "review_4"],
+      "name": "Customer Review Slider",
+      "settings": {
+        "heading": "Customer Reviews"
+      }
+    },
+    "premium_ingredients_home": {
+      "type": "premium-ingredients",
+      "blocks": {
+        "ingredient_1": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_2": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_1.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_3": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_2.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_4": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_5.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        }
+      },
+      "block_order": ["ingredient_1", "ingredient_2", "ingredient_3", "ingredient_4"],
+      "name": "Premium Ingredients",
+      "settings": {
+        "heading": "Premium Ingredients"
+      }
+    },
+    "feeding_guide_home": {
+      "type": "feeding-guide",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 10 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "weight": "10 – 25 kg",
+            "daily": "1 Stick",
+            "monthly": "2 packs"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "weight": "25 – 40 kg",
+            "daily": "1.5 Sticks",
+            "monthly": "3 packs"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "weight": "Over 40 kg",
+            "daily": "2 Sticks",
+            "monthly": "4 packs"
+          }
+        }
+      },
+      "block_order": ["row_1", "row_2", "row_3", "row_4"],
+      "name": "Feeding Guide",
+      "settings": {
+        "image": "shopify://shop_images/2150930449_1.png",
+        "heading": "Feeding guide"
+      }
+    },
+    "benefits_feel_home": {
+      "type": "benefits-feel",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "number": "2",
+            "title": "Boosts Immunity",
+            "text": "Antioxidants and key nutrients strengthen your dog's natural defence system."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "number": "3",
+            "title": "Improves Coat & Skin",
+            "text": "Omega fatty acids nourish skin and promote a shiny, healthy coat."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "number": "4",
+            "title": "Reduces Tear Stains",
+            "text": "Targeted gut health support helps reduce tear stains and eye discharge."
+          }
+        }
+      },
+      "block_order": ["benefit_1", "benefit_2", "benefit_3", "benefit_4"],
+      "name": "Benefits – Pet Can Feel",
+      "settings": {
+        "heading": "Benefits your pet can feel.",
+        "bg_color": "#EC2C86"
+      }
+    },
+    "journey_with_wellie_home": {
+      "type": "journey-with-wellie",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "month": "Month 2",
+            "title": "Visible improvements in coat and energy",
+            "points": "Coat becomes shinier and skin irritation reduces.\nIncreased energy levels and playfulness observed."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "month": "Month 3",
+            "title": "Long-term gut health and immunity",
+            "points": "Sustained gut flora balance for lasting health.\nStronger immune response and fewer vet visits."
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "name": "Journey With Wellie",
+      "settings": {
+        "heading": "Start Your Journey With Wellie",
+        "side_image": "shopify://shop_images/2150930449_1_1.png"
+      }
+    },
+    "bestseller_bundles_home": {
+      "type": "bestseller-bundles",
+      "name": "Bestseller Bundles",
+      "settings": {
+        "heading": "Wellie Bestseller Bundles",
+        "collection": "wellie-best-seller"
+      }
+    },
+    "check_with_my_vet_home": {
+      "type": "check-with-my-vet",
+      "name": "Check with my vet",
+      "settings": {
+        "image": "shopify://shop_images/close-up-veterinarian-taking-care-dog_1.png",
+        "heading": "Check with my vet",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "button_text": "Copy Message",
+        "button_link": ""
+      }
     }
   },
   "order": [
     "hero_banner_AiN3fp",
-    "product_grid_99YYr7"
+    "feature_marquee_home",
+    "product_grid_99YYr7",
+    "testimonial_cards_home",
+    "customer_reactions_home",
+    "premium_ingredients_home",
+    "feeding_guide_home",
+    "benefits_feel_home",
+    "journey_with_wellie_home",
+    "bestseller_bundles_home",
+    "check_with_my_vet_home"
   ]
 }
