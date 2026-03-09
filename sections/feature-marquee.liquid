@@ -72,20 +72,20 @@
   style="background-color: {{ section.settings.bg_color }};"
 >
   <div
-    class="marquee-track flex w-max items-center gap-8 py-3"
+    class="marquee-track flex w-max items-center gap-4 md:gap-8 py-2 md:py-3"
     style="animation-duration: {{ section.settings.speed }}s;"
   >
     {% for i in (1..2) %}
       {% for block in section.blocks %}
         <div
-          class="flex items-center gap-2 text-sm font-semibold whitespace-nowrap"
+          class="flex items-center gap-2 text-xs md:text-sm font-semibold whitespace-nowrap"
           style="color: {{ section.settings.text_color }};"
         >
           {% if block.settings.icon != blank %}
             <img
               src="{{ block.settings.icon | image_url: width: 40 }}"
               alt=""
-              class="h-5 w-5 object-contain"
+              class="h-4 w-4 md:h-5 md:w-5 object-contain"
               width="20"
               height="20"
               loading="eager"
