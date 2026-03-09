@@ -12,7 +12,58 @@
     "main": {
       "type": "product",
       "settings": {}
+    },
+    "benefits_feel_LceQAn": {
+      "type": "benefits-feel",
+      "blocks": {
+        "benefit_VVeLTT": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_E6Kix6": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_BrbMyB": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        },
+        "benefit_erYqMa": {
+          "type": "benefit",
+          "settings": {
+            "number": "1",
+            "title": "Supports Digestive Health",
+            "text": "Prebiotics, probiotics, and enzymes help maintain a healthy gut and smooth digestion."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_VVeLTT",
+        "benefit_E6Kix6",
+        "benefit_BrbMyB",
+        "benefit_erYqMa"
+      ],
+      "name": "Benefits – Pet Can Feel",
+      "settings": {
+        "heading": "Benefits your pet can feel.",
+        "bg_color": "#EC2C86"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "benefits_feel_LceQAn"
+  ]
 }
