@@ -293,6 +293,19 @@
   </div>
 </section>
 
+<!-- Description Section -->
+{% if product.description != blank %}
+  <section class="max-w-7xl mx-auto px-6 pb-12">
+    <div class="border border-[#025A60] rounded-2xl p-6">
+      <h2 class="text-lg font-bold text-gray-900 mb-3">Description</h2>
+      <hr class="border-gray-200 mb-4">
+      <div class="text-gray-700 text-sm leading-relaxed">
+        {{ product.description }}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
 <script type="application/json" id="product-variants-json">
   {{ product.variants | json }}
 </script>
