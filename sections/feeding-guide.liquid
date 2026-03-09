@@ -1,4 +1,4 @@
-<section class=" max-w-7xl mx-auto px-20 py-10">
+<section class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-10">
   <div class="feeding-guide__container">
     <!-- LEFT IMAGE -->
     {% if section.settings.image != blank %}
@@ -87,14 +87,25 @@
     color: #333;
   }
 
-  /* Mobile */
-  @media (max-width: 768px) {
+  /* Mobile / Tablet */
+  @media (max-width: 1024px) {
     .feeding-guide__container {
       grid-template-columns: 1fr;
+      padding: 20px;
+    }
+
+    .feeding-guide__title {
+      font-size: 20px;
     }
 
     .feeding-guide__img {
-      height: 280px;
+      height: 240px;
+    }
+
+    .feeding-guide__table th,
+    .feeding-guide__table td {
+      padding: 8px 4px;
+      font-size: 14px;
     }
   }
 </style>
