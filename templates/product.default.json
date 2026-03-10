@@ -137,12 +137,154 @@
       "settings": {
         "heading": "Customer Reviews"
       }
+    },
+    "product_description_blocks_8KJ3XF": {
+      "type": "product-description-blocks",
+      "blocks": {
+        "paragraph_BbxMwC": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Wellie Bellie Bites are expertly formulated to support your dog’s gut health. If you’ve noticed tear stains in their eyes, a dull coat, your dog scratching itself, licking its paws, or just bad breath that doesn’t seem to go away - the Bellie Bites are the answer to these common issues.  "
+          }
+        },
+        "paragraph_HD7pCL": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Our premium supplements are designed to optimize digestive health, enhance immune function, and improve overall well-being. Powered by a scientifically developed blend of prebiotics, probiotics, and digestive enzymes, each treat delivers targeted benefits for a healthier, happier pet. "
+          }
+        },
+        "paragraph_jbag49": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Each of these bites comes with 4 billion CFUs - that’s 4 Billion clinically approved live strains to help your dog build good bacteria and defend against allergies."
+          }
+        }
+      },
+      "block_order": [
+        "paragraph_BbxMwC",
+        "paragraph_HD7pCL",
+        "paragraph_jbag49"
+      ],
+      "name": "Product Description",
+      "settings": {
+        "heading": "Description"
+      }
+    },
+    "premium_ingredients_fqa8Gz": {
+      "type": "premium-ingredients",
+      "blocks": {
+        "ingredient_4yR9VR": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_PMtWQ3": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_1.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_RaYJMG": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_2.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        },
+        "ingredient_g7nAhF": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/image_2932_5.png",
+            "title": "Fresh Chicken",
+            "text": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength.",
+            "read_more_link": "",
+            "tag_one": "IMMUNITY",
+            "tag_two": "LONGEVITY"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_4yR9VR",
+        "ingredient_PMtWQ3",
+        "ingredient_RaYJMG",
+        "ingredient_g7nAhF"
+      ],
+      "name": "Premium Ingredients",
+      "settings": {
+        "heading": "Premium Ingredients"
+      }
+    },
+    "feeding_guide_EPJk7z": {
+      "type": "feeding-guide",
+      "blocks": {
+        "row_yDc9ip": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_YVXEpL": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_9AWzD7": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        },
+        "row_L3Fhqz": {
+          "type": "row",
+          "settings": {
+            "weight": "Under 25 kg",
+            "daily": "1/2 Stick",
+            "monthly": "1 pack"
+          }
+        }
+      },
+      "block_order": [
+        "row_yDc9ip",
+        "row_YVXEpL",
+        "row_9AWzD7",
+        "row_L3Fhqz"
+      ],
+      "name": "Feeding Guide",
+      "settings": {
+        "image": "shopify://shop_images/21509304491.png",
+        "heading": "Feeding guide"
+      }
     }
   },
   "order": [
     "main",
     "feature_marquee_JwTNFL",
     "testimonial_cards_KzNJ48",
-    "customer_reactions_tcAGk9"
+    "customer_reactions_tcAGk9",
+    "product_description_blocks_8KJ3XF",
+    "premium_ingredients_fqa8Gz",
+    "feeding_guide_EPJk7z"
   ]
 }
