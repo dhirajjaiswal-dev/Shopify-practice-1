@@ -58,12 +58,24 @@
       "name": "Benefits – Pet Can Feel",
       "settings": {
         "heading": "Benefits your pet can feel.",
-        "bg_color": "#EC2C86"
+        "bg_color": "#ec2c86"
+      }
+    },
+    "check_with_my_vet_yMAMRP": {
+      "type": "check-with-my-vet",
+      "name": "Check with my vet",
+      "settings": {
+        "image": "shopify://shop_images/close-up-veterinarian-taking-care-dog_1.png",
+        "heading": "Check with my vet",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "button_text": "Copy Message",
+        "button_link": ""
       }
     }
   },
   "order": [
     "main",
-    "benefits_feel_LceQAn"
+    "benefits_feel_LceQAn",
+    "check_with_my_vet_yMAMRP"
   ]
 }
