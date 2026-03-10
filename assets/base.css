@@ -131,12 +131,13 @@ svg {
     list-style: none;
     margin: 0;
     padding: 0;
-    color:blue !important;
+    color: #025A60 !important;
   }
 
   .header-nav a {
     text-decoration: none;
     font-weight: 500;
+    color: #025A60 !important;
   }
 
   .header-icons {
