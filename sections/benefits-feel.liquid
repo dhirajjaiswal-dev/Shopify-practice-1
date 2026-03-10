@@ -20,7 +20,7 @@
       {% endfor %}
     </div>
   </div>
-  <div class="mt-6 pt-6 flex w-full items-center justify-between">
+  <div class="mt-6 pt-6 hidden md:flex w-full items-center justify-between">
     <img
       src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4118.png?v=1768451535"
       alt="Benefits Feel"
@@ -96,14 +96,24 @@
     opacity: 0.95;
   }
 
-  /* Mobile */
-  @media (max-width: 768px) {
+  /* Mobile / Tablet */
+  @media (max-width: 1024px) {
     .benefits-feel__heading {
-      font-size: 30px;
+      font-size: 26px;
+      margin-bottom: 32px;
     }
 
     .benefits-feel__grid {
       grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .benefits-feel__content h3 {
+      font-size: 17px;
+    }
+
+    .benefits-feel__content p {
+      font-size: 14px;
     }
   }
 </style>
