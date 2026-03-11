@@ -14,46 +14,6 @@
       "name": "Hero Banner",
       "settings": {}
     },
-    "feature_marquee_home": {
-      "type": "feature-marquee",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "icon": "shopify://shop_images/Vector_1.png",
-            "text": "Scientifically Formulated"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "icon": "shopify://shop_images/Vector_1.png",
-            "text": "Vet Approved"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "icon": "shopify://shop_images/Vector_1.png",
-            "text": "Targets Root Cause"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "icon": "shopify://shop_images/Vector_1.png",
-            "text": "Scientifically Formulated"
-          }
-        }
-      },
-      "block_order": ["item_1", "item_2", "item_3", "item_4"],
-      "name": "Feature Marquee",
-      "settings": {
-        "bg_color": "#EC2C86",
-        "text_color": "#ffffff",
-        "speed": 30
-      }
-    },
     "product_grid_99YYr7": {
       "type": "product-grid",
       "name": "Product Grid",
@@ -96,7 +56,11 @@
           }
         }
       },
-      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"],
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
       "name": "Testimonial Cards",
       "settings": {}
     },
@@ -132,7 +96,12 @@
           }
         }
       },
-      "block_order": ["review_1", "review_2", "review_3", "review_4"],
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
       "name": "Customer Review Slider",
       "settings": {
         "heading": "Customer Reviews"
@@ -186,7 +155,12 @@
           }
         }
       },
-      "block_order": ["ingredient_1", "ingredient_2", "ingredient_3", "ingredient_4"],
+      "block_order": [
+        "ingredient_1",
+        "ingredient_2",
+        "ingredient_3",
+        "ingredient_4"
+      ],
       "name": "Premium Ingredients",
       "settings": {
         "heading": "Premium Ingredients"
@@ -228,7 +202,12 @@
           }
         }
       },
-      "block_order": ["row_1", "row_2", "row_3", "row_4"],
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ],
       "name": "Feeding Guide",
       "settings": {
         "image": "shopify://shop_images/2150930449_1.png",
@@ -271,11 +250,16 @@
           }
         }
       },
-      "block_order": ["benefit_1", "benefit_2", "benefit_3", "benefit_4"],
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
       "name": "Benefits – Pet Can Feel",
       "settings": {
         "heading": "Benefits your pet can feel.",
-        "bg_color": "#EC2C86"
+        "bg_color": "#ec2c86"
       }
     },
     "journey_with_wellie_home": {
@@ -306,7 +290,11 @@
           }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
       "name": "Journey With Wellie",
       "settings": {
         "heading": "Start Your Journey With Wellie",
@@ -335,7 +323,6 @@
   },
   "order": [
     "hero_banner_AiN3fp",
-    "feature_marquee_home",
     "product_grid_99YYr7",
     "testimonial_cards_home",
     "customer_reactions_home",
