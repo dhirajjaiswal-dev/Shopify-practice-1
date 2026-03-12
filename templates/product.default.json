@@ -13,6 +13,43 @@
       "type": "product",
       "settings": {}
     },
+    "feature_marquee_TamBPt": {
+      "type": "feature-marquee",
+      "blocks": {
+        "item_HhxT8B": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        },
+        "item_zjPaxU": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        },
+        "item_zY7ACb": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.png",
+            "text": "Scientifically Formulated"
+          }
+        }
+      },
+      "block_order": [
+        "item_HhxT8B",
+        "item_zjPaxU",
+        "item_zY7ACb"
+      ],
+      "name": "Feature Marquee",
+      "settings": {
+        "bg_color": "#EC2C86",
+        "text_color": "#ffffff",
+        "speed": 30
+      }
+    },
     "benefits_feel_LceQAn": {
       "type": "benefits-feel",
       "blocks": {
@@ -75,6 +112,7 @@
   },
   "order": [
     "main",
+    "feature_marquee_TamBPt",
     "benefits_feel_LceQAn",
     "check_with_my_vet_yMAMRP"
   ]
