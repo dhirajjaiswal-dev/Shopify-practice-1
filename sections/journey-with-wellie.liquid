@@ -1,51 +1,66 @@
-<section class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-7">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-start">
-    <!-- LEFT CONTENT -->
-    <div>
-      <h2 class="text-xl md:text-2xl lg:text-3xl text-center font-semibold text-gray-800 mb-6 md:mb-10">
-        {{ section.settings.heading }}
-      </h2>
+<section class="bg-[#FAF6F1] py-12 md:py-16">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-      <div class="relative">
-        <!-- Vertical line -->
-        <div class="absolute text-center left-4 md:left-8 top-0 h-full w-px bg-dashed border-l border-gray-300"></div>
+      <!-- LEFT: Timeline -->
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-10">
+          {{ section.settings.heading }}
+        </h2>
 
-        <div class="space-y-6 md:space-y-12">
+        <div class="relative">
           {% for block in section.blocks %}
-            <div class="relative pl-10 md:pl-14">
-              <!-- Month badge -->
-              <span class="absolute left-0 top-0 inline-flex items-center justify-center rounded-full border border-teal-500 text-teal-600 text-xs font-medium px-3 py-1 bg-white">
-                {{ block.settings.month }}
-              </span>
+            <div class="relative flex gap-4{% unless forloop.last %} pb-10{% endunless %}" {{ block.shopify_attributes }}>
 
-              <h3 class="text-lg text-center font-semibold text-gray-800 mb-3">
-                {{ block.settings.title }}
-              </h3>
+              <!-- Timeline spine: badge + dashed line -->
+              <div class="flex flex-col items-center flex-shrink-0">
+                <!-- Month badge -->
+                <span class="inline-flex items-center whitespace-nowrap rounded-full border border-teal-500 text-teal-600 text-xs font-medium px-3 py-1 bg-white z-10">
+                  {{ block.settings.month }}
+                </span>
+                <!-- Dashed connector (hidden on last step) -->
+                {% unless forloop.last %}
+                  <div class="flex-1 mt-1" style="width:1px; border-left: 2px dashed #9ca3af; min-height: 40px;"></div>
+                {% endunless %}
+              </div>
 
-              <ul class="list-disc text-left pl-10 md:pl-16 space-y-2 text-gray-600 text-sm">
-                {% assign lines = block.settings.points | newline_to_br | split: '<br />' %}
-                {% for line in lines %}
-                  <li>{{ line }}</li>
-                {% endfor %}
-              </ul>
+              <!-- Content -->
+              <div class="pt-0.5 pb-2">
+                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2 leading-snug">
+                  {{ block.settings.title }}
+                </h3>
+                <ul class="space-y-1">
+                  {% assign lines = block.settings.points | newline_to_br | split: '<br />' %}
+                  {% for line in lines %}
+                    {% if line != blank %}
+                      <li class="flex items-start gap-2 text-sm text-gray-600">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0"></span>
+                        <span>{{ line | strip }}</span>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+
             </div>
           {% endfor %}
         </div>
       </div>
-    </div>
 
-    <!-- RIGHT IMAGE -->
-    <div class="w-full">
-      {% if section.settings.side_image != blank %}
-        <img
-          src="{{ section.settings.side_image | image_url: width: 800 }}"
-          alt="Journey image"
-          class="w-full rounded-xl object-cover"
-          loading="lazy"
-          width="800"
-          height="800"
-        >
-      {% endif %}
+      <!-- RIGHT: Image -->
+      <div class="w-full">
+        {% if section.settings.side_image != blank %}
+          <img
+            src="{{ section.settings.side_image | image_url: width: 800 }}"
+            alt="Journey image"
+            class="w-full rounded-2xl object-cover"
+            loading="lazy"
+            width="800"
+            height="800"
+          >
+        {% endif %}
+      </div>
+
     </div>
   </div>
 </section>
