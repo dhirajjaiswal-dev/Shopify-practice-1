@@ -45,10 +45,15 @@
       ],
       "name": "Feature Marquee",
       "settings": {
-        "bg_color": "#EC2C86",
+        "bg_color": "#ec2c86",
         "text_color": "#ffffff",
         "speed": 30
       }
+    },
+    "testimonial_metaobject_XmBLKj": {
+      "type": "testimonial-metaobject",
+      "name": "Testimonial (Metaobject)",
+      "settings": {}
     },
     "benefits_feel_LceQAn": {
       "type": "benefits-feel",
@@ -108,12 +113,57 @@
         "button_text": "Copy Message",
         "button_link": ""
       }
+    },
+    "customer_reactions_wFhttt": {
+      "type": "customer-reactions",
+      "blocks": {
+        "review_gFCfe6": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        },
+        "review_cm3FTy": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_6.png",
+            "video": ""
+          }
+        },
+        "review_fqG8Yq": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_5.png",
+            "video": ""
+          }
+        },
+        "review_B3yhFd": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/Instagram_story_-_9.png",
+            "video": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_gFCfe6",
+        "review_cm3FTy",
+        "review_fqG8Yq",
+        "review_B3yhFd"
+      ],
+      "name": "Customer Review Slider",
+      "settings": {
+        "heading": "Customer Reviews"
+      }
     }
   },
   "order": [
     "main",
     "feature_marquee_TamBPt",
+    "testimonial_metaobject_XmBLKj",
     "benefits_feel_LceQAn",
-    "check_with_my_vet_yMAMRP"
+    "check_with_my_vet_yMAMRP",
+    "customer_reactions_wFhttt"
   ]
 }
