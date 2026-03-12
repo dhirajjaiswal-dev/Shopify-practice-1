@@ -45,7 +45,7 @@
             </video>
           {% elsif block.settings.image != blank %}
             <img
-              src="{{ block.settings.image | image_url: }}"
+              src="{{ block.settings.image | image_url: width: 600 }}"
               class="w-full h-full object-cover"
               loading="lazy"
               alt=""
