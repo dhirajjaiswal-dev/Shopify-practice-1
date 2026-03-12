@@ -156,6 +156,82 @@
       "settings": {
         "heading": "Customer Reviews"
       }
+    },
+    "journey_with_wellie_U7dLYN": {
+      "type": "journey-with-wellie",
+      "blocks": {
+        "step_yhYGxn": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        },
+        "step_DW3GJL": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        },
+        "step_48XKR3": {
+          "type": "step",
+          "settings": {
+            "month": "Month 1",
+            "title": "Initial adaptation and digestive support",
+            "points": "The prebiotics help improve nutrient absorption.\nEnhanced digestion often leads to an improved appetite."
+          }
+        }
+      },
+      "block_order": [
+        "step_yhYGxn",
+        "step_DW3GJL",
+        "step_48XKR3"
+      ],
+      "name": "Journey With Wellie",
+      "settings": {
+        "heading": "Start Your Journey With Wellie",
+        "side_image": "shopify://shop_images/2150930449_1_1.png"
+      }
+    },
+    "is_this_right_for_dog_jB4bDN": {
+      "type": "is-this-right-for-dog",
+      "blocks": {
+        "benefit_8EkBYi": {
+          "type": "benefit",
+          "settings": {
+            "title": "Supports Healthy Teeth and Gums",
+            "description": "Designed to promote oral wellness, these dental sticks help support strong, healthy teeth and gums with every chew."
+          }
+        },
+        "benefit_zYaeJ9": {
+          "type": "benefit",
+          "settings": {
+            "title": "Supports Healthy Teeth and Gums",
+            "description": "Designed to promote oral wellness, these dental sticks help support strong, healthy teeth and gums with every chew."
+          }
+        },
+        "benefit_ef9z8H": {
+          "type": "benefit",
+          "settings": {
+            "title": "Supports Healthy Teeth and Gums",
+            "description": "Designed to promote oral wellness, these dental sticks help support strong, healthy teeth and gums with every chew."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_8EkBYi",
+        "benefit_zYaeJ9",
+        "benefit_ef9z8H"
+      ],
+      "name": "Is This Right For My Dog",
+      "settings": {
+        "heading": "Is this right for my dog?",
+        "bg_color": "#CBEA5C",
+        "main_image": "shopify://shop_images/2150930449_1_2.png"
+      }
     }
   },
   "order": [
@@ -164,6 +240,8 @@
     "testimonial_metaobject_XmBLKj",
     "benefits_feel_LceQAn",
     "check_with_my_vet_yMAMRP",
-    "customer_reactions_wFhttt"
+    "customer_reactions_wFhttt",
+    "journey_with_wellie_U7dLYN",
+    "is_this_right_for_dog_jB4bDN"
   ]
 }
