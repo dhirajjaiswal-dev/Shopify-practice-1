@@ -50,15 +50,15 @@
 
         <!-- Price -->
         <div class="flex items-center gap-3 mb-1">
-          <span class="text-xl md:text-2xl font-bold">
-            {{ product.price | money }}
+          <span id="ProductPrice" class="text-xl md:text-2xl font-bold">
+            {{ product.selected_or_first_available_variant.price | money }}
           </span>
 
-          {% if product.compare_at_price > product.price %}
-            <span class="line-through text-gray-400">
-              {{ product.compare_at_price | money }}
+          <span id="ProductComparePriceWrapper" {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}style="display:none"{% endunless %}>
+            <span id="ProductComparePrice" class="line-through text-gray-400">
+              {{ product.selected_or_first_available_variant.compare_at_price | money }}
             </span>
-          {% endif %}
+          </span>
         </div>
 
         <p class="text-sm text-gray-500 mb-4">MRP Inclusive of all taxes</p>
@@ -94,7 +94,10 @@
                       type="radio"
                       name="id"
                       value="{{ variant.id }}"
-                      class="hidden peer"
+                      class="hidden peer variant-price-radio"
+                      data-price="{{ variant.price | money }}"
+                      data-compare-price="{{ variant.compare_at_price | money }}"
+                      data-has-compare="{% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %}"
                       {% if variant == product.selected_or_first_available_variant %}
                         checked
                       {% endif %}

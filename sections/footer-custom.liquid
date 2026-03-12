@@ -1,0 +1,274 @@
+<section class="footer-custom-section">
+  <div class="footer-custom-wrapper">
+    <div class="footer-custom-grid">
+      <!-- Logo & About -->
+      <div class="footer-custom-logo-about">
+        <div class="footer-custom-logo">Wellie</div>
+        <div class="footer-custom-about">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</div>
+        <div class="footer-custom-social">
+          {% for block in section.blocks %}
+            {% if block.type == 'social' and block.settings.social_icon != blank %}
+              <a href="{{ block.settings.social_link }}" target="_blank" class="footer-custom-social-link">
+                <img src="{{ block.settings.social_icon | image_url: width: 32 }}" alt="Social Icon" class="footer-custom-social-icon" width="32" height="32">
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Company Links -->
+      <div class="footer-custom-links">
+        <div class="footer-custom-links-title">Company</div>
+        <ul>
+          {% for link in section.settings.company_links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- Product Links -->
+      <div class="footer-custom-links">
+        <div class="footer-custom-links-title">Products</div>
+        <ul>
+          {% for link in section.settings.product_links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- Contact & Back to Top -->
+      <div class="footer-custom-contact">
+        <button class="footer-custom-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
+        <div class="footer-custom-contact-title">Want to get in touch?</div>
+        <div class="footer-custom-contact-desc">We'd love to hear from you!<br>For any feedback or queries, contact us on :</div>
+        <div class="footer-custom-contact-info">
+          <span><strong>Email:</strong> {{ section.settings.email }}</span>
+          <span><strong>Phone:</strong> {{ section.settings.phone }}</span>
+        </div>
+        <div class="footer-custom-contact-hours">
+          <strong>Operating Hours:</strong><br>{{ section.settings.hours }}
+        </div>
+      </div>
+    </div>
+    <div class="footer-custom-copyright">
+      © 2025 Wellie. Powered by Shopify.
+    </div>
+  </div>
+</section>
+
+<style>
+.footer-custom-section {
+  background: #025A60;
+  color: #fff;
+  padding: 0;
+}
+.footer-custom-wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.footer-custom-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  padding: 48px 0 24px 0;
+}
+.footer-custom-logo {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  font-family: inherit;
+}
+.footer-custom-about {
+  font-size: 16px;
+  margin-bottom: 24px;
+  opacity: 0.95;
+}
+.footer-custom-social {
+  display: flex;
+  gap: 16px;
+}
+.footer-custom-social-link {
+  display: inline-block;
+}
+.footer-custom-social-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.footer-custom-links-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.footer-custom-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-custom-links ul li {
+  margin-bottom: 8px;
+}
+.footer-custom-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  opacity: 0.95;
+}
+.footer-custom-links ul li a:hover {
+  text-decoration: underline;
+}
+.footer-custom-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.footer-custom-top-btn {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 24px;
+  padding: 6px 18px;
+  font-size: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.footer-custom-top-btn:hover {
+  background: #fff;
+  color: #025A60;
+}
+.footer-custom-contact-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.footer-custom-contact-desc {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.footer-custom-contact-info {
+  font-size: 16px;
+  margin-bottom: 4px;
+  display: flex;
+  gap: 24px;
+}
+.footer-custom-contact-hours {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.footer-custom-copyright {
+  text-align: center;
+  font-size: 15px;
+  opacity: 0.8;
+  padding: 16px 0 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+@media (max-width: 1024px) {
+  .footer-custom-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .footer-custom-logo {
+    font-size: 32px;
+  }
+  .footer-custom-wrapper {
+    padding: 0 16px;
+  }
+}
+@media (max-width: 640px) {
+  .footer-custom-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 24px 0 12px 0;
+  }
+  .footer-custom-logo {
+    font-size: 24px;
+  }
+  .footer-custom-about {
+    font-size: 13px;
+  }
+  .footer-custom-links-title {
+    font-size: 15px;
+  }
+  .footer-custom-links ul li a {
+    font-size: 13px;
+  }
+  .footer-custom-contact-title {
+    font-size: 16px;
+  }
+  .footer-custom-contact-info {
+    font-size: 13px;
+    gap: 12px;
+  }
+  .footer-custom-contact-hours {
+    font-size: 13px;
+  }
+  .footer-custom-copyright {
+    font-size: 12px;
+    padding: 8px 0 4px 0;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Footer Custom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact Email",
+      "default": "raya@wellie.in"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Contact Phone",
+      "default": "+91 97407 57184"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Operating Hours",
+      "default": "Mon- Sun, 10am to 6pm"
+    },
+    {
+      "type": "link_list",
+      "id": "company_links",
+      "label": "Company Links"
+    },
+    {
+      "type": "link_list",
+      "id": "product_links",
+      "label": "Product Links"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social",
+      "name": "Social Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "social_icon",
+          "label": "Social Icon"
+        },
+        {
+          "type": "url",
+          "id": "social_link",
+          "label": "Social Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Footer Custom",
+      "blocks": [
+        {"type": "social"}, {"type": "social"}, {"type": "social"}, {"type": "social"}
+      ]
+    }
+  ]
+}
+{% endschema %}

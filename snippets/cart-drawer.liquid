@@ -43,22 +43,32 @@
 
     <!-- Footer -->
     <div
-      class="border-t px-5 pt-5 pb-8 space-y-4 {% if cart.item_count == 0 %}hidden{% endif %}"
+      class="border-t bg-white px-5 pt-4 pb-8 space-y-4 {% if cart.item_count == 0 %}hidden{% endif %}"
       data-cart-footer
     >
-      <div class="flex items-center justify-between">
-        <span class="text-gray-600 font-medium">Subtotal</span>
-        <span class="text-lg font-bold text-gray-900" data-cart-total>
+      <div class="flex items-center justify-between py-1">
+        <span class="text-base text-gray-500 font-medium">Subtotal</span>
+        <span class="text-xl font-bold text-gray-900" data-cart-total>
           {{ cart.total_price | money }}
         </span>
       </div>
-      <p class="text-xs text-gray-400">Taxes and shipping calculated at checkout</p>
+      <p class="text-xs text-gray-400 -mt-2">Taxes and shipping calculated at checkout</p>
       <a
         href="/checkout"
-        class="block w-full bg-[#025a60] text-white text-center py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity"
+        class="flex items-center justify-center gap-2 w-full text-white text-center py-4 rounded-2xl font-bold text-base transition-colors shadow-sm"
+        style="background-color: #025a60;"
+        onmouseover="this.style.backgroundColor='#01474c'"
+        onmouseout="this.style.backgroundColor='#025a60'"
       >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         Buy Now
       </a>
+      <button
+        onclick="CartManager.close()"
+        class="w-full text-sm text-[#025A60] font-medium hover:underline py-1 transition-colors"
+      >
+        Continue Shopping →
+      </button>
     </div>
 
   </div>

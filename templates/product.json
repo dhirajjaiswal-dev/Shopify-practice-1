@@ -387,6 +387,11 @@
         "button_text": "Copy Message",
         "button_link": ""
       }
+    },
+    "testimonial_metaobject_home": {
+      "type": "testimonial-metaobject",
+      "name": "Testimonial (Metaobject)",
+      "settings": {}
     }
   },
   "order": [
@@ -400,6 +405,7 @@
     "benefits_feel_tiiwar",
     "journey_with_wellie_WDhqd6",
     "bestseller_bundles_qGfDYj",
-    "check_with_my_vet_MwPbJF"
+    "check_with_my_vet_MwPbJF",
+    "testimonial_metaobject_home"
   ]
 }

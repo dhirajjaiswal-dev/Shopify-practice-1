@@ -82,38 +82,47 @@ const CartManager = {
 
     const variant =
       item.variant_title && item.variant_title !== 'Default Title'
-        ? `<p class="text-xs text-gray-500 mt-0.5">${item.variant_title}</p>`
+        ? `<p class="text-xs text-gray-400 mt-0.5">${item.variant_title}</p>`
         : '';
 
     const comparePrice =
       item.original_line_price > item.final_line_price
-        ? `<p class="text-xs text-gray-400 line-through">${this.formatMoney(item.original_line_price)}</p>`
+        ? `<span class="text-xs text-gray-400 line-through ml-1.5">${this.formatMoney(item.original_line_price)}</span>`
         : '';
 
+    const trashIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>`;
+
     return `
-      <div class="flex gap-3 pb-4 border-b border-gray-100 last:border-0">
+      <div class="flex gap-4 py-5 border-b border-gray-100 last:border-0">
         <a href="${item.url}" class="flex-shrink-0">${image}</a>
-        <div class="flex-1 min-w-0">
-          <a href="${item.url}" class="block hover:underline">
-            <h3 class="text-sm font-medium leading-snug line-clamp-2">${item.product_title}</h3>
-            ${variant}
-          </a>
-          <div class="flex items-end justify-between mt-2">
-            <cart-actions data-line="${index}">
-              <div class="flex items-center border border-[#025A60] rounded-xl overflow-hidden">
-                <button data-quantity="${item.quantity - 1}" data-minus
-                  class="w-8 h-8 flex items-center justify-center hover:bg-[#025A60]/10 text-[#025A60] font-bold text-base transition-colors">−</button>
-                <span class="w-8 text-center text-sm font-semibold text-[#025A60]">${item.quantity}</span>
-                <button data-quantity="${item.quantity + 1}" data-plus
-                  class="w-8 h-8 flex items-center justify-center hover:bg-[#025A60]/10 text-[#025A60] font-bold text-base transition-colors">+</button>
-              </div>
-              <button data-quantity="0" data-remove
-                class="text-xs text-red-500 hover:text-red-700 mt-1.5 block transition-colors">Remove</button>
-            </cart-actions>
-            <div class="text-right ml-2">
-              <p class="text-sm font-semibold">${this.formatMoney(item.final_line_price)}</p>
+        <div class="flex-1 min-w-0 flex flex-col justify-between gap-3">
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <a href="${item.url}" class="hover:underline">
+                <h3 class="text-sm font-semibold text-gray-900 leading-snug line-clamp-2">${item.product_title}</h3>
+              </a>
+              ${variant}
+            </div>
+            <div class="text-right flex-shrink-0">
+              <p class="text-sm font-bold text-gray-900">${this.formatMoney(item.final_line_price)}</p>
               ${comparePrice}
             </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <cart-actions data-line="${index}" class="flex items-center gap-3">
+              <div class="inline-flex items-center border border-gray-200 rounded-lg overflow-hidden select-none">
+                <button data-quantity="${item.quantity - 1}" data-minus
+                  class="w-9 h-9 flex items-center justify-center bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold text-lg transition-colors leading-none">−</button>
+                <span class="w-9 h-9 flex items-center justify-center text-sm font-semibold text-gray-900 bg-white">${item.quantity}</span>
+                <button data-quantity="${item.quantity + 1}" data-plus
+                  class="w-9 h-9 flex items-center justify-center bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold text-lg transition-colors leading-none">+</button>
+              </div>
+              <button data-quantity="0" data-remove
+                class="inline-flex items-center gap-1 text-xs text-red-500 hover:text-red-700 font-medium transition-colors py-1 px-2 rounded-md hover:bg-red-50">
+                ${trashIcon}
+                Remove
+              </button>
+            </cart-actions>
           </div>
         </div>
       </div>

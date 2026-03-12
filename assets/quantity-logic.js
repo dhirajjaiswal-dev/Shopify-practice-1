@@ -24,11 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (matchedVariant) {
         variantInput.value = matchedVariant.id;
-        
-        // Optional: Update price or availability display if needed
-        // console.log('Found variant:', matchedVariant);
-        
-        // Update URL state (optional but good practice)
+
+        // Update price display
+        const priceEl = document.getElementById('ProductPrice');
+        const comparePriceEl = document.getElementById('ProductComparePrice');
+        const comparePriceWrapper = document.getElementById('ProductComparePriceWrapper');
+        if (priceEl) priceEl.textContent = matchedVariant.price;
+        if (comparePriceWrapper) {
+          if (matchedVariant.has_compare) {
+            if (comparePriceEl) comparePriceEl.textContent = matchedVariant.compare_at_price;
+            comparePriceWrapper.style.display = '';
+          } else {
+            comparePriceWrapper.style.display = 'none';
+          }
+        }
+
+        // Update URL state
         const newUrl = new URL(window.location);
         newUrl.searchParams.set('variant', matchedVariant.id);
         window.history.replaceState({}, '', newUrl);
@@ -44,7 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // updateVariant(); 
   }
 
-  // 2. Quantity Logic
+  // 2. Variant Price Update (for direct name="id" radios)
+  const priceRadios = document.querySelectorAll('.variant-price-radio');
+  const productPriceEl = document.getElementById('ProductPrice');
+  const productComparePriceEl = document.getElementById('ProductComparePrice');
+  const productComparePriceWrapper = document.getElementById('ProductComparePriceWrapper');
+
+  if (priceRadios.length > 0 && productPriceEl) {
+    priceRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        productPriceEl.textContent = radio.dataset.price;
+        if (productComparePriceEl && productComparePriceWrapper) {
+          if (radio.dataset.hasCompare === 'true') {
+            productComparePriceEl.textContent = radio.dataset.comparePrice;
+            productComparePriceWrapper.style.display = '';
+          } else {
+            productComparePriceWrapper.style.display = 'none';
+          }
+        }
+      });
+    });
+  }
+
+  // 3. Quantity Logic
   const qtyInputs = document.querySelectorAll('.qty-input');
   const qtyMinusBtns = document.querySelectorAll('.qty-minus');
   const qtyPlusBtns = document.querySelectorAll('.qty-plus');

@@ -1,0 +1,110 @@
+<section class="certified-trusted-section">
+  <div class="certified-trusted-wrapper">
+    <h2 class="certified-trusted-heading">Certified & Trusted</h2>
+    <div class="certified-trusted-logos">
+      {% for block in section.blocks %}
+        <div class="certified-trusted-logo-item">
+          {% if block.settings.logo_img != blank %}
+            <img src="{{ block.settings.logo_img | image_url: width: 120 }}" alt="Certification Logo" class="certified-trusted-logo-img" loading="lazy" width="120" height="120">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.certified-trusted-section {
+  background: #d7e99b;
+  padding: 40px 0;
+  position: relative;
+}
+.certified-trusted-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.certified-trusted-heading {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 32px;
+}
+.certified-trusted-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+.certified-trusted-logo-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.certified-trusted-logo-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: transparent;
+}
+@media (max-width: 1024px) {
+  .certified-trusted-wrapper {
+    padding: 0 20px;
+  }
+  .certified-trusted-logos {
+    gap: 24px;
+  }
+  .certified-trusted-logo-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media (max-width: 640px) {
+  .certified-trusted-section {
+    padding: 24px 0;
+  }
+  .certified-trusted-heading {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+  .certified-trusted-logos {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .certified-trusted-logo-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Certified & Trusted",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_img",
+          "label": "Certification Logo"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Certified & Trusted",
+      "blocks": [
+        {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}
+      ]
+    }
+  ]
+}
+{% endschema %}

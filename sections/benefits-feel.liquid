@@ -1,4 +1,4 @@
-<section class="max-w-6xl mx-auto px-4 md:px-6 lg:px-20 py-7" style="background-color: {{ section.settings.bg_color }}">
+<section class="benefits-feel" style="background-color: {{ section.settings.bg_color }}">
   <div class="benefits-feel__container">
     <!-- Heading -->
     <h2 class="benefits-feel__heading">
@@ -20,87 +20,181 @@
       {% endfor %}
     </div>
   </div>
-  <div class="mt-6 pt-6 hidden md:flex w-full items-center justify-between">
-    <img
-      src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4118.png?v=1768451535"
-      alt="Benefits Feel"
-      class="benefits-feel__image"
-      loading="lazy"
-      width="100"
-      height="100"
-    >
-    <img
-      src="https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Group_4119.png?v=1768451630"
-      alt="Benefits Feel"
-      class="benefits-feel__image"
-      loading="lazy"
-      width="100"
-      height="100"
-    >
+
+  <!-- Decorative Icons -->
+  <div class="benefits-feel__decorations">
+    {% if section.settings.icon_left != blank %}
+      <img
+        src="{{ section.settings.icon_left | image_url: width: 150 }}"
+        alt="Benefits Feel Left Icon"
+        class="benefits-feel__icon benefits-feel__icon--left"
+        loading="lazy"
+        width="120"
+        height="120"
+      >
+    {% endif %}
+    {% if section.settings.icon_right != blank %}
+      <img
+        src="{{ section.settings.icon_right | image_url: width: 150 }}"
+        alt="Benefits Feel Right Icon"
+        class="benefits-feel__icon benefits-feel__icon--right"
+        loading="lazy"
+        width="120"
+        height="120"
+      >
+    {% endif %}
   </div>
 </section>
 
 <style>
   .benefits-feel {
-    padding: 80px 20px;
+    padding: 60px 40px;
     color: #fff;
+    border-radius: 24px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' padding='30px' fill='none'%3E%3Cpath d='M20 20h20v20H20z' stroke='rgba(255,255,255,0.08)'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    position: relative;
+    overflow: hidden;
+    margin: 40px auto;
+    max-width: 1200px;
   }
 
-  {% comment %} .benefits-feel__container {
-    max-width: 800px;
+  .benefits-feel__container {
+    max-width: 1000px;
     margin: 0 auto;
-
-  } {% endcomment %}
+    position: relative;
+    z-index: 2;
+  }
 
   .benefits-feel__heading {
     text-align: center;
-    font-size: 42px;
+    font-size: 48px;
     font-weight: 700;
     margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .benefits-feel__heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 2px;
   }
 
   .benefits-feel__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px 60px;
+    gap: 50px 80px;
+    padding-top: 20px;
   }
 
   .benefits-feel__item {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 20px;
   }
 
   .benefits-feel__number {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
+    font-size: 16px;
     flex-shrink: 0;
   }
 
   .benefits-feel__content h3 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    line-height: 1.3;
   }
 
   .benefits-feel__content p {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     opacity: 0.95;
   }
 
-  /* Mobile / Tablet */
+  .benefits-feel__decorations {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    display: block;
+  }
+
+  .benefits-feel__icon {
+    position: absolute;
+    bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .benefits-feel__icon--left {
+    left: 30px;
+  }
+
+  .benefits-feel__icon--right {
+    right: 30px;
+  }
+
+  /* Tablet / Medium screens */
   @media (max-width: 1024px) {
+    .benefits-feel {
+      padding: 50px 30px;
+    }
+
     .benefits-feel__heading {
-      font-size: 26px;
-      margin-bottom: 32px;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .benefits-feel__heading::after {
+      width: 240px;
+    }
+
+    .benefits-feel__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px 40px;
+    }
+
+    .benefits-feel__content h3 {
+      font-size: 18px;
+    }
+
+    .benefits-feel__content p {
+      font-size: 14px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .benefits-feel {
+      padding: 40px 20px;
+      margin: 20px auto;
+    }
+
+    .benefits-feel__heading {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .benefits-feel__heading::after {
+      width: 160px;
+      bottom: -8px;
     }
 
     .benefits-feel__grid {
@@ -108,12 +202,18 @@
       gap: 24px;
     }
 
+    .benefits-feel__number {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+
     .benefits-feel__content h3 {
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .benefits-feel__content p {
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 </style>
@@ -133,6 +233,16 @@
       "id": "bg_color",
       "label": "Background color",
       "default": "#EC2C86"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_left",
+      "label": "Left Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_right",
+      "label": "Right Icon Image"
     }
   ],
   "blocks": [

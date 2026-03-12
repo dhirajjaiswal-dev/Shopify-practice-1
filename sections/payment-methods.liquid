@@ -1,0 +1,140 @@
+<section class="payment-methods-section">
+  <div class="payment-methods-wrapper">
+    <div class="payment-methods-inner">
+      <h2 class="payment-methods-heading">Securely pay using</h2>
+      <div class="payment-methods-logos">
+        {% for block in section.blocks %}
+          <div class="payment-methods-logo-item">
+            {% if block.settings.logo_img != blank %}
+              <img src="{{ block.settings.logo_img | image_url: width: 60 }}" alt="Payment Logo" class="payment-methods-logo-img" loading="lazy" width="60" height="60">
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="payment-methods-note">
+        OH! and cash on delivery too :)
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .payment-methods-section {
+    background: #fff;
+    padding: 0;
+    position: relative;
+  }
+  .payment-methods-wrapper {
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90px;
+  }
+  .payment-methods-inner {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .payment-methods-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+  .payment-methods-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .payment-methods-logo-item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .payment-methods-logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    background: transparent;
+    display: block;
+  }
+  .payment-methods-note {
+    font-size: 15px;
+    color: #025A60;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  @media (max-width: 1024px) {
+    .payment-methods-inner {
+      max-width: 95vw;
+    }
+    .payment-methods-logos {
+      gap: 14px;
+    }
+    .payment-methods-logo-img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  @media (max-width: 640px) {
+    .payment-methods-section {
+      padding: 0;
+    }
+    .payment-methods-heading {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .payment-methods-logos {
+      gap: 6px;
+    }
+    .payment-methods-logo-img {
+      width: 28px;
+      height: 28px;
+    }
+    .payment-methods-note {
+      font-size: 11px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Payment Methods",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_img",
+          "label": "Payment Logo"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Payment Methods",
+      "blocks": [
+        {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}, {"type": "logo"}
+      ]
+    }
+  ]
+}
+{% endschema %}
