@@ -1,68 +1,60 @@
+{%- assign ingredients = shop.metaobjects.feeding_guide.values -%}
+
 <section class="bg-[#FFF9F7] py-14">
   <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-10">
-    <!-- Heading -->
+
     {% if section.settings.heading != blank %}
       <h2 class="text-2xl md:text-3xl font-semibold text-center mb-10">
         {{ section.settings.heading }}
       </h2>
     {% endif %}
 
-    <!-- Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {% for block in section.blocks %}
-        <div
-          class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition"
-          {{ block.shopify_attributes }}
-        >
-          <!-- Image -->
-          {% if block.settings.image != blank %}
+      {% for ingredient in ingredients %}
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
+
+          {%- if ingredient.image.value != blank -%}
             <div class="aspect-[4/3] overflow-hidden">
               {{
-                block.settings.image
+                ingredient.image.value
                 | image_url: width: 600
-                | image_tag: class: 'w-full h-full object-cover', loading: 'lazy'
+                | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', alt: ingredient.heading.value
               }}
             </div>
-          {% endif %}
+          {%- endif -%}
 
-          <!-- Content -->
           <div class="p-5 flex flex-col h-full">
-            <!-- Title -->
-            <h3 class="text-base font-semibold text-gray-900 mb-2">
-              {{ block.settings.title }}
-            </h3>
 
-            <!-- Description -->
-            <p class="text-sm text-gray-600 leading-snug mb-3">
-              {{ block.settings.text }}
-              {% if block.settings.read_more_link != blank %}
-                <a
-                  href="{{ block.settings.read_more_link }}"
-                  class="font-medium text-gray-900 underline ml-1"
-                >
-                  Read more
-                </a>
-              {% endif %}
-            </p>
+            {%- if ingredient.heading.value != blank -%}
+              <h3 class="text-base font-semibold text-gray-900 mb-2">
+                {{ ingredient.heading.value }}
+              </h3>
+            {%- endif -%}
 
-            <!-- Tags -->
-            <div class=" flex flex-wrap gap-2">
-              {% if block.settings.tag_one != blank %}
-                <span class="text-xs font-medium px-3 py-1 rounded-full bg-teal-50 text-teal-700">
-                  {{ block.settings.tag_one }}
-                </span>
-              {% endif %}
+            {%- if ingredient.description.value != blank -%}
+              <p class="text-sm text-gray-600 leading-snug mb-3">
+                {{ ingredient.description.value | truncatewords: 15 }}<strong class="text-gray-900 cursor-pointer">...Read more</strong>
+              </p>
+            {%- endif -%}
 
-              {% if block.settings.tag_two != blank %}
-                <span class="text-xs font-medium px-3 py-1 rounded-full bg-teal-50 text-teal-700">
-                  {{ block.settings.tag_two }}
-                </span>
-              {% endif %}
-            </div>
+            {%- if ingredient.tab.value != blank -%}
+              <div class="flex flex-wrap gap-2">
+                {%- assign tags = ingredient.tab.value | split: ',' -%}
+                {%- for tag in tags -%}
+                  <span class="text-xs font-medium px-3 py-1 rounded-full bg-teal-50 text-teal-700">
+                    {{ tag | strip | upcase }}
+                  </span>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
           </div>
         </div>
+      {% else %}
+        <p class="col-span-4 text-center text-gray-400 text-sm">No ingredients found. Add entries to the Premium Ingredients metaobject.</p>
       {% endfor %}
     </div>
+
   </div>
 </section>
 
@@ -77,52 +69,9 @@
       "default": "Premium Ingredients"
     }
   ],
-  "blocks": [
-    {
-      "type": "ingredient",
-      "name": "Ingredient Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Fresh Chicken"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Description",
-          "default": "Premium source of fresh, tasty protein. Supports tissue repair, growth, and overall strength."
-        },
-        {
-          "type": "url",
-          "id": "read_more_link",
-          "label": "Read more link"
-        },
-        {
-          "type": "text",
-          "id": "tag_one",
-          "label": "Tag 1",
-          "default": "IMMUNITY"
-        },
-        {
-          "type": "text",
-          "id": "tag_two",
-          "label": "Tag 2",
-          "default": "LONGEVITY"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Premium Ingredients",
-      "blocks": [{ "type": "ingredient" }, { "type": "ingredient" }, { "type": "ingredient" }, { "type": "ingredient" }]
+      "name": "Premium Ingredients"
     }
   ]
 }

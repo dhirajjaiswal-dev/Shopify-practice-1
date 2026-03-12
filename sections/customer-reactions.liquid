@@ -1,19 +1,14 @@
-<h2 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-3 text-center text-gray-900 pt-8">Love at First Bite</h2>
+<h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-3 text-center text-gray-900 pt-8">Love at First Bite.</h2>
 <p class="text-center text-sm md:text-base text-gray-600">Real dogs. Real reactions. Zero convincing required.</p>
 
-<section class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-10">
-  <!-- Slider Wrapper -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-10" data-reaction-section>
   <div class="relative">
+
     <!-- Left Arrow -->
     <button
       type="button"
       data-slide-prev
-      class="
-        absolute left-0 top-1/2 -translate-y-1/2 z-10
-        bg-white/90 hover:bg-white
-        w-10 h-10 rounded-full shadow
-        hidden sm:flex items-center justify-center
-      "
+      class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white w-10 h-10 rounded-full shadow hidden sm:flex items-center justify-center"
     >
       ‹
     </button>
@@ -22,12 +17,7 @@
     <button
       type="button"
       data-slide-next
-      class="
-        absolute right-0 top-1/2 -translate-y-1/2 z-10
-        bg-white/90 hover:bg-white
-        w-10 h-10 rounded-full shadow
-        hidden sm:flex items-center justify-center
-      "
+      class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white w-10 h-10 rounded-full shadow hidden sm:flex items-center justify-center"
     >
       ›
     </button>
@@ -40,39 +30,37 @@
     >
       {% for block in section.blocks %}
         <div
-          class="
-            min-w-[180px] max-w-[180px] h-[320px]
-            sm:min-w-[220px] sm:max-w-[220px] sm:h-[380px]
-            md:min-w-[240px] md:max-w-[240px] md:h-[420px]
-            rounded-2xl overflow-hidden
-            bg-black relative flex-shrink-0
-          "
+          class="review-card flex-shrink-0 w-[300px] h-[500px] rounded-2xl overflow-hidden bg-black relative"
+          {{ block.shopify_attributes }}
         >
           {% if block.settings.video != blank %}
             <video
-              class="w-full h-full object-cover"
+              class="review-video"
               autoplay
               muted
               loop
               playsinline
+              width="300"
+              height="500"
             >
               <source src="{{ block.settings.video }}" type="video/mp4">
             </video>
-
-            <!-- Play Icon -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="bg-black/50 w-12 h-12 rounded-full flex items-center justify-center text-white">▶</div>
-            </div>
-
           {% elsif block.settings.image != blank %}
             <img
-              src="{{ block.settings.image | image_url: width: 600 }}"
+              src="{{ block.settings.image | image_url: }}"
               class="w-full h-full object-cover"
               loading="lazy"
               alt=""
-              width="240"
-              height="420"
+              width="300"
+              height="500"
             >
+          {% endif %}
+
+          <!-- Play icon: hidden by default, shown on hover via CSS -->
+          {% if block.settings.video != blank %}
+            <div class="play-icon absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200">
+              <div class="bg-black/50 w-12 h-12 rounded-full flex items-center justify-center text-white">▶</div>
+            </div>
           {% endif %}
         </div>
       {% endfor %}
@@ -81,9 +69,19 @@
 </section>
 
 <style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .review-card { width: 300px !important; height: 500px !important; }
+  .review-card .review-video {
+    display: block;
+    width: 300px;
+    height: 500px;
+    max-width: 300px;
+    max-height: 500px;
+    object-fit: cover;
   }
+  .review-card:hover .play-icon { opacity: 1; }
 </style>
 
 <script src="{{ 'review-slider.js' | asset_url }}" defer></script>
