@@ -5,22 +5,21 @@
     position: relative;
   }
 
-  /* Scrollable track — no overflow:hidden so next slide peeks */
+  /* Scrollable track — no border-radius here to avoid implicit overflow clip */
   .mp-track {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    border-radius: 16px;
   }
   .mp-track::-webkit-scrollbar { display: none; }
 
-  /* Each slide: slightly narrower than container → next slide peeks */
+  /* Each slide: slightly narrower so next slide peeks ~36px on the right */
   .mp-slide {
     flex-shrink: 0;
-    width: calc(100% - 44px);   /* 44px peek of next slide */
-    margin-right: 10px;
+    width: calc(100% - 36px);
+    margin-right: 8px;
     scroll-snap-align: start;
     border-radius: 16px;
     overflow: hidden;
@@ -36,26 +35,40 @@
     display: block;
   }
 
-  /* Arrow buttons */
+  /* Arrow buttons — !important needed to beat base.css svg height:auto */
   .mp-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #E52888;
-    border: 0.5px solid #D4E391;
-    box-shadow: 0.5px 0.5px 0px #D4E391;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    cursor: pointer;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    border-radius: 50% !important;
+    background: #E52888 !important;
+    border: 0.5px solid #D4E391 !important;
+    box-shadow: 0.5px 0.5px 0px #D4E391 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    z-index: 10 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
   }
-  .mp-arrow--prev { left: 10px; }
-  /* right arrow sits at the end of the visible slide, before the peek area */
-  .mp-arrow--next { right: 54px; }
+  .mp-arrow--prev { left: 10px !important; }
+  /* right edge of slide = wrapper_width - 36px; arrow right edge = that - 10px gap */
+  .mp-arrow--next { right: 46px !important; }
+
+  /* Stop base.css svg { height: auto } from stretching arrow SVGs */
+  .mp-arrow svg {
+    width: 6px !important;
+    height: 10px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+  }
 
   /* Thumbnails */
   .mp-thumbs {
@@ -130,6 +143,7 @@
               {% endfor %}
             </div>
 
+            
             <!-- Left arrow -->
             <button
               type="button"
