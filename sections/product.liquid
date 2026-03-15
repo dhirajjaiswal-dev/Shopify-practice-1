@@ -1,3 +1,28 @@
+ <style>
+ .mp-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+  
+    background: #ff2b8b !important;
+    
+    border: 0.5px solid #D4E391 !important;
+    box-shadow: 0.5px 0.5px 0px #D4E391 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    z-index: 10 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+  }
+</style>
 <section class="max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-12">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
     <!-- LEFT: PRODUCT IMAGES -->
@@ -18,22 +43,44 @@
           {% endfor %}
 
           <!-- LEFT ARROW -->
-          <button
+          {% comment %} <button
             type="button"
             class="absolute left-4 top-1/2 -translate-y-1/2 bg-pink-700 p-2 rounded-full"
             onclick="prevImage()"
           >
             ‹
-          </button>
+          </button> {% endcomment %}
+          <button
+              type="button"
+              class="absolute left-4 top-1/2 -translate-y-1/2 mp-arrow mp-arrow--next border border-[#D4E391] rounded-full"
+              data-mp-next
+              aria-label="Next image"
+              onclick="prevImage()"
+            >
+              <svg width="6" height="6" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 1L1 5L5 9" stroke="#D4E391" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button> 
 
           <!-- RIGHT ARROW -->
-          <button
+          {% comment %} <button
             type="button"
-            class="absolute right-4 top-1/2 -translate-y-1/2 bg-pink-700 p-2 rounded-full"
+            class="absolute right-4 top-1/2 -translate-y-1/2 bg-pink-700 p-4 rounded-full"
             onclick="nextImage()"
           >
-            ›
-          </button>
+            >
+          </button> {% endcomment %}
+            <button
+              type="button"
+              class="absolute right-4 top-1/2 -translate-y-1/2 mp-arrow mp-arrow--next border border-[#D4E391] rounded-full"
+              data-mp-next
+              aria-label="Next image"
+              onclick="nextImage()"
+            >
+              <svg width="6" height="6" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L5 5L1 9" stroke="#D4E391" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button> 
         </div>
 
         <!-- Thumbnails -->
