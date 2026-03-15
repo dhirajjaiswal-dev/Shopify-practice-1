@@ -1,6 +1,37 @@
-<div class="announcement-bar">
-  {{ section.settings.heading }}
-</div>
+{% if section.settings.heading != blank %}
+  <div class="announcement-bar">
+    <span class="announcement-bar__text">{{ section.settings.heading }}</span>
+  </div>
+{% endif %}
+
+<style>
+  /* Announcement bar — matches Figma: #025A60 bg, #F9F3F1 text, Cabin 12px */
+  .announcement-bar {
+    background-color: #025A60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 16px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .announcement-bar__text {
+    font-family: 'Cabin', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #F9F3F1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Strip default richtext paragraph margin */
+  .announcement-bar__text p {
+    margin: 0;
+    display: inline;
+  }
+</style>
 
 {% schema %}
 {
@@ -9,7 +40,8 @@
     {
       "type": "richtext",
       "id": "heading",
-      "label": "Heading"
+      "label": "Announcement Text",
+      "default": "<p>15% Off over ₹5000 Use Code WELLIEWOW</p>"
     }
   ],
   "presets": [

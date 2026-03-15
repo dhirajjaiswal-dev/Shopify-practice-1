@@ -1,28 +1,96 @@
-{% if product.description != blank %}
-  <section class="max-w-7xl mx-auto px-6 pb-12">
-    <div class="border border-[#025A60] rounded-2xl p-6">
-      <h2 class="text-lg font-bold text-gray-900 mb-3">{{ section.settings.heading }}</h2>
-      <hr class="border-gray-200 mb-4">
-      <div class="text-gray-700 text-sm leading-relaxed">
-        {{ product.description }}
-      </div>
+<section class="max-w-7xl mx-auto px-6 pb-12">
+  <div class="border border-[#025A60] rounded-2xl overflow-hidden">
+
+    <!-- Tab Buttons -->
+    <div class="flex">
+      <button
+        type="button"
+        class="pd-tab px-6 py-4 text-sm font-semibold transition-colors duration-200"
+        data-tab="description"
+        data-active="true"
+      >
+        Description
+      </button>
+      <button
+        type="button"
+        class="pd-tab px-6 py-4 text-sm font-semibold transition-colors duration-200"
+        data-tab="about"
+      >
+        About
+      </button>
     </div>
-  </section>
-{% endif %}
+
+    <hr class="border-gray-200">
+
+    <!-- Description Panel -->
+    <div class="pd-panel p-6 text-gray-700 text-sm leading-relaxed" data-panel="description">
+      {{ product.description }}
+    </div>
+
+    <!-- About Panel -->
+    <div class="pd-panel p-6 text-gray-700 text-sm leading-relaxed hidden" data-panel="about">
+      {% assign about_metaobject = product.metafields.custom.about.value %}
+      {% if about_metaobject != blank and about_metaobject.about_description != blank %}
+        {{ about_metaobject.about_description }}
+      {% else %}
+        <p class="text-gray-400 italic">No about information available.</p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .pd-tab[data-active="true"] {
+    background-color: #025A60;
+    color: #ffffff;
+  }
+  .pd-tab:not([data-active="true"]) {
+    background-color: transparent;
+    color: #1a1a1a;
+  }
+  .pd-tab:not([data-active="true"]):hover {
+    background-color: #f0f9f9;
+  }
+</style>
+
+<script>
+  (function () {
+    var section = document.currentScript.closest('section') || document.currentScript.previousElementSibling;
+    var container = section ? section.querySelector('.border') : null;
+    if (!container) {
+      var sections = document.querySelectorAll('.pd-tab');
+      if (sections.length) container = sections[0].closest('.border');
+    }
+    if (!container) return;
+
+    var tabs = container.querySelectorAll('.pd-tab');
+    var panels = container.querySelectorAll('.pd-panel');
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var target = tab.dataset.tab;
+
+        tabs.forEach(function (t) { t.removeAttribute('data-active'); });
+        tab.setAttribute('data-active', 'true');
+
+        panels.forEach(function (panel) {
+          if (panel.dataset.panel === target) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        });
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
   "name": "Product Description",
   "limit": 1,
-  "templates": ["product"],
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Description"
-    }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Product Description"

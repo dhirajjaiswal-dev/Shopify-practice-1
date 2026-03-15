@@ -1,42 +1,220 @@
+<style>
+  /* ── Mobile image slider (< 768px only) ── */
+
+  .mp-slider-wrapper {
+    position: relative;
+  }
+
+  /* Scrollable track — no overflow:hidden so next slide peeks */
+  .mp-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-radius: 16px;
+  }
+  .mp-track::-webkit-scrollbar { display: none; }
+
+  /* Each slide: slightly narrower than container → next slide peeks */
+  .mp-slide {
+    flex-shrink: 0;
+    width: calc(100% - 44px);   /* 44px peek of next slide */
+    margin-right: 10px;
+    scroll-snap-align: start;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: #fff;
+  }
+  .mp-slide:last-child { margin-right: 0; }
+
+  .mp-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Arrow buttons */
+  .mp-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #E52888;
+    border: 0.5px solid #D4E391;
+    box-shadow: 0.5px 0.5px 0px #D4E391;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .mp-arrow--prev { left: 10px; }
+  /* right arrow sits at the end of the visible slide, before the peek area */
+  .mp-arrow--next { right: 54px; }
+
+  /* Thumbnails */
+  .mp-thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .mp-thumbs::-webkit-scrollbar { display: none; }
+
+  .mp-thumb {
+    position: relative;
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+  }
+  .mp-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+  }
+  /* White overlay for inactive thumbnails */
+  .mp-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 6px;
+    transition: opacity 0.2s;
+  }
+  /* Active: teal border, no overlay */
+  .mp-thumb.is-active {
+    border-color: #025A60;
+  }
+  .mp-thumb.is-active::after {
+    display: none;
+  }
+</style>
+
 <section class="w-full bg-[#f9f3f1] py-10">
   <div class="max-w-7xl mx-auto px-4 md:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+
       <!-- LEFT: PRODUCT IMAGES -->
       <div>
-        <div class="rounded-2xl overflow-hidden bg-white border">
-          <img
-            id="MainProductImage"
-            src="{{ product.featured_image | image_url: width: 900 }}"
-            alt="{{ product.title }}"
-            class="w-full h-auto object-cover"
-            width="900"
-            height="900"
-            loading="eager"
-          >
-        </div>
 
-        <!-- Thumbnails -->
-        <div class="flex gap-3 mt-4">
-          {% for image in product.images %}
+        <!-- ── MOBILE SLIDER (hidden on md+) ── -->
+        <div class="md:hidden">
+          <div class="mp-slider-wrapper" data-mp-slider>
+
+            <!-- Scrollable track -->
+            <div class="mp-track" data-mp-track>
+              {% for image in product.images %}
+                <div class="mp-slide">
+                  <img
+                    src="{{ image | image_url: width: 900 }}"
+                    alt="{{ product.title }}"
+                    width="900"
+                    height="900"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  >
+                </div>
+              {% endfor %}
+            </div>
+
+            <!-- Left arrow -->
             <button
               type="button"
-              onclick="document.getElementById('MainProductImage').src='{{ image | image_url: width: 900 }}'"
-              class="border rounded-lg p-1 hover:border-black"
+              class="mp-arrow mp-arrow--prev"
+              data-mp-prev
+              aria-label="Previous image"
             >
-              <img
-                src="{{ image | image_url: width: 120 }}"
-                alt="{{ product.title }}"
-                class="w-20 h-20 object-cover rounded"
-                width="120"
-                height="120"
-                loading="lazy"
-              >
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 1L1 5L5 9" stroke="#D4E391" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </button>
-          {% endfor %}
+
+            <!-- Right arrow -->
+            <button
+              type="button"
+              class="mp-arrow mp-arrow--next"
+              data-mp-next
+              aria-label="Next image"
+            >
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L5 5L1 9" stroke="#D4E391" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+          </div>
+
+          <!-- Thumbnails -->
+          <div class="mp-thumbs" data-mp-thumbs>
+            {% for image in product.images %}
+              <button
+                type="button"
+                class="mp-thumb {% if forloop.first %}is-active{% endif %}"
+                data-mp-thumb="{{ forloop.index0 }}"
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 200 }}"
+                  alt="{{ product.title }}"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              </button>
+            {% endfor %}
+          </div>
         </div>
+
+        <!-- ── DESKTOP (unchanged, hidden on mobile) ── -->
+        <div class="hidden md:block">
+          <div class="rounded-2xl overflow-hidden bg-white border">
+            <img
+              id="MainProductImage"
+              src="{{ product.featured_image | image_url: width: 900 }}"
+              alt="{{ product.title }}"
+              class="w-full h-auto object-cover"
+              width="900"
+              height="900"
+              loading="eager"
+            >
+          </div>
+
+          <!-- Desktop Thumbnails -->
+          <div class="flex gap-3 mt-4">
+            {% for image in product.images %}
+              <button
+                type="button"
+                onclick="document.getElementById('MainProductImage').src='{{ image | image_url: width: 900 }}'"
+                class="border rounded-lg p-1 hover:border-black"
+              >
+                <img
+                  src="{{ image | image_url: width: 120 }}"
+                  alt="{{ product.title }}"
+                  class="w-20 h-20 object-cover rounded"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                >
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+
       </div>
 
-      <!-- RIGHT: PRODUCT DETAILS -->
+      <!-- RIGHT: PRODUCT DETAILS — unchanged -->
       <div>
         {% if section.settings.badge_text != blank %}
           <span class="inline-block bg-pink-100 text-pink-600 text-sm font-semibold px-3 py-1 rounded-full mb-4">
@@ -151,9 +329,57 @@
           </div>
         {% endif %}
       </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    var slider = document.querySelector('[data-mp-slider]');
+    if (!slider) return;
+
+    var track  = slider.querySelector('[data-mp-track]');
+    var thumbs = Array.from(slider.parentElement.querySelectorAll('[data-mp-thumb]'));
+    var prevBtn = slider.querySelector('[data-mp-prev]');
+    var nextBtn = slider.querySelector('[data-mp-next]');
+    var total  = thumbs.length;
+    var current = 0;
+
+    function slideWidth() {
+      var first = track.firstElementChild;
+      return first ? first.offsetWidth + 10 : track.offsetWidth; /* width + margin-right */
+    }
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.scrollTo({ left: slideWidth() * current, behavior: 'smooth' });
+      thumbs.forEach(function (t, i) {
+        t.classList.toggle('is-active', i === current);
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+    thumbs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        goTo(parseInt(t.getAttribute('data-mp-thumb'), 10));
+      });
+    });
+
+    /* Sync active thumb on manual swipe */
+    track.addEventListener('scroll', function () {
+      var idx = Math.round(track.scrollLeft / slideWidth());
+      if (idx !== current && idx >= 0 && idx < total) {
+        current = idx;
+        thumbs.forEach(function (t, i) {
+          t.classList.toggle('is-active', i === current);
+        });
+      }
+    }, { passive: true });
+  })();
+</script>
 
 {% schema %}
 {
@@ -163,7 +389,7 @@
       "type": "text",
       "id": "badge_text",
       "label": "Top Badge Text",
-      "default": "India’s #1 Advanced Dog Food"
+      "default": "India's #1 Advanced Dog Food"
     },
     {
       "type": "text",

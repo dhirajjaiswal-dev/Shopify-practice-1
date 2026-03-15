@@ -1,63 +1,504 @@
-<footer class="footer relative overflow-hidden bg-black">
-  <div class="footer__background">
-    {% render 'image',
-      image: section.settings.footer_desktop_background,
-      mobile_image: section.settings.footer_mobile_background,
-      alt: 'Footer Background',
-      width: '1440',
-      height: '500'
-    %}
+<footer class="footer">
+
+  <!-- Background Image -->
+  <div class="footer__bg">
+    {% if section.settings.footer_desktop_background != blank %}
+      <img
+        src="{{ section.settings.footer_desktop_background | image_url: width: 1440 }}"
+        alt=""
+        class="footer__bg-img footer__bg-img--desktop"
+        loading="lazy"
+        width="1440"
+        height="600"
+      >
+    {% endif %}
+    {% if section.settings.footer_mobile_background != blank %}
+      <img
+        src="{{ section.settings.footer_mobile_background | image_url: width: 600 }}"
+        alt=""
+        class="footer__bg-img footer__bg-img--mobile"
+        loading="lazy"
+        width="600"
+        height="900"
+      >
+    {% endif %}
   </div>
-  <div class="footer__content flex flex-col justify-between w-full h-full py-6 px-4 lg:p-20">
-    <div class="footer__content-container flex flex-col gap-10 lg:gap-36 lg:flex-row justify-between pb-5">
-      <div class="footer__content-logo-container flex-1">
-        {% render 'logo', class_name: 'w-auto h-10', color: 'white', background: '#000' %}
-      </div>
-      <div class="footer__content-menu-container flex-[2]">
-        <ul class="footer__content-menu-list flex flex-col gap-8 lg:flex-row lg:gap-4">
-          {% for link in section.settings.menu.links %}
-            <li class="footer__content-menu-item flex-1">
-              <a
-                href="{{ link.url }}"
-                class="footer__content-menu-link text-white text-sm font-light lg:opacity-80 uppercase pb-2 lg:pb-3 no-underline hover:underline hover:underline-offset-4"
-              >
-                {{- link.title -}}
-              </a>
-              {% if link.links.size > 0 %}
-                <ul class="footer__content-menu-submenu-list flex flex-col gap-2 lg:gap-3">
-                  {% for child_link in link.links %}
-                    <li class="footer__content-menu-submenu-item leading-3">
-                      <a
-                        href="{{ child_link.url }}"
-                        class="footer__content-menu-submenu-link text-white text-sm leading-normal lg:text-base font-light opacity-70 uppercase lg:opacity-100"
-                      >
-                        {{- child_link.title -}}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+
+  <div class="footer__inner">
+
+    <!-- Back to Top: mobile only, sits at very top -->
+    <div class="footer__backtop-mobile">
+      <button type="button" class="footer__backtop-btn" data-scroll-top>
+        ↑ &nbsp;Back to Top
+      </button>
     </div>
-    <div class="footer__content-copyright-container text-white text-base font-light pt-4 border-t-[1px] border-white opacity-70">
+
+    <!-- Main Grid -->
+    <div class="footer__grid">
+
+      <!-- Column 1: Brand -->
+      <div class="footer__brand">
+        <a href="{{ routes.root_url }}" class="footer__brand-logo">
+          {% if section.settings.footer_logo != blank %}
+            <img
+              src="{{ section.settings.footer_logo | image_url: width: 600 }}"
+              alt="{{ shop.name }}"
+              class="footer__logo-img"
+              width="{{ section.settings.footer_logo.width }}"
+              height="{{ section.settings.footer_logo.height }}"
+              loading="lazy"
+            >
+          {% else %}
+            {% render 'logo', class_name: 'footer__logo-img', color: 'white', background: 'transparent' %}
+          {% endif %}
+        </a>
+
+        {% if section.settings.description != blank %}
+          <p class="footer__brand-desc">{{ section.settings.description }}</p>
+        {% endif %}
+
+        <div class="footer__social">
+          {% if section.settings.fb_url != blank %}
+            <a href="{{ section.settings.fb_url }}" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.ig_url != blank %}
+            <a href="{{ section.settings.ig_url }}" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.tw_url != blank %}
+            <a href="{{ section.settings.tw_url }}" class="footer__social-link" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.yt_url != blank %}
+            <a href="{{ section.settings.yt_url }}" class="footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Column 2: Company Nav -->
+      {% if section.settings.company_menu != blank %}
+        <nav class="footer__nav footer__nav--company" aria-label="{{ section.settings.company_menu_heading }}">
+          {% if section.settings.company_menu_heading != blank %}
+            <h3 class="footer__nav-heading">{{ section.settings.company_menu_heading }}</h3>
+          {% endif %}
+          <ul class="footer__nav-list">
+            {% for link in linklists[section.settings.company_menu].links %}
+              <li class="footer__nav-item">
+                <a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+
+      <!-- Column 3: Products Nav -->
+      {% if section.settings.products_menu != blank %}
+        <nav class="footer__nav footer__nav--products" aria-label="{{ section.settings.products_menu_heading }}">
+          {% if section.settings.products_menu_heading != blank %}
+            <h3 class="footer__nav-heading">{{ section.settings.products_menu_heading }}</h3>
+          {% endif %}
+          <ul class="footer__nav-list">
+            {% for link in linklists[section.settings.products_menu].links %}
+              <li class="footer__nav-item">
+                <a href="{{ link.url }}" class="footer__nav-link">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+
+      <!-- Column 4: Contact (+ Back to Top on desktop) -->
+      <div class="footer__contact">
+        <div class="footer__backtop-desktop">
+          <button type="button" class="footer__backtop-btn" data-scroll-top>
+            ↑ &nbsp;Back to Top
+          </button>
+        </div>
+
+        {% if section.settings.contact_heading != blank %}
+          <h3 class="footer__contact-heading">{{ section.settings.contact_heading }}</h3>
+        {% endif %}
+
+        {% if section.settings.contact_description != blank %}
+          <div class="footer__contact-desc">{{ section.settings.contact_description }}</div>
+        {% endif %}
+
+        {% if section.settings.email != blank or section.settings.phone != blank %}
+          <div class="footer__contact-details">
+            {% if section.settings.email != blank %}
+              <span class="footer__contact-item">
+                <strong class="footer__contact-label">Email:</strong>
+                <a href="mailto:{{ section.settings.email }}" class="footer__contact-value">{{ section.settings.email }}</a>
+              </span>
+            {% endif %}
+            {% if section.settings.phone != blank %}
+              <span class="footer__contact-item">
+                <strong class="footer__contact-label">Phone:</strong>
+                <span class="footer__contact-value">{{ section.settings.phone }}</span>
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.hours_label != blank %}
+          <p class="footer__hours-label">{{ section.settings.hours_label }}</p>
+        {% endif %}
+        {% if section.settings.hours_value != blank %}
+          <p class="footer__hours-value">{{ section.settings.hours_value }}</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Copyright Bar -->
+  <div class="footer__copyright">
+    <div class="footer__copyright-inner">
       {{ section.settings.footer_copyright_text }}
     </div>
   </div>
+
 </footer>
+
+<style>
+  /* ── Base ── */
+  .footer {
+    position: relative;
+    background-color: #025A60;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  /* ── Background Image ── */
+  .footer__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .footer__bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .footer__bg-img--mobile { display: none; }
+  .footer__bg-img--desktop { display: block; }
+
+  /* ── Inner ── */
+  .footer__inner {
+    position: relative;
+    z-index: 1;
+    {% comment %} max-width: 1200px; {% endcomment %}
+    margin: 0 auto;
+    padding: 60px 80px 40px;
+  }
+
+  /* ── Back to Top (Mobile) ── */
+  .footer__backtop-mobile {
+    display: none;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+
+  /* ── Back to Top Button (shared) ── */
+  .footer__backtop-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .footer__backtop-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ── Back to Top (Desktop inside contact col) ── */
+  .footer__backtop-desktop {
+    margin-bottom: 28px;
+  }
+
+  /* ── Main Grid: 4 columns ── */
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.85fr 1fr 1.2fr;
+    grid-template-areas: "brand company products contact";
+    gap: 48px;
+    align-items: start;
+  }
+
+  .footer__brand     { grid-area: brand; }
+  .footer__nav--company  { grid-area: company; }
+  .footer__nav--products { grid-area: products; }
+  .footer__contact   { grid-area: contact; }
+
+  /* ── Brand Column ── */
+  .footer__brand-logo {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .footer__logo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .footer__brand-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 24px;
+    max-width: 260px;
+  }
+
+  /* ── Social Icons ── */
+  .footer__social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+
+  .footer__social-link:hover { opacity: 1; }
+
+  /* ── Nav Columns ── */
+  .footer__nav-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 0.01em;
+  }
+
+  .footer__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer__nav-link {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .footer__nav-link:hover { color: #fff; }
+
+  /* ── Contact Column ── */
+  .footer__contact-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .footer__contact-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 20px;
+  }
+
+  .footer__contact-desc p { margin: 0; }
+
+  .footer__contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 20px;
+  }
+
+  .footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .footer__contact-label {
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .footer__contact-value {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+  }
+
+  .footer__contact-value:hover { color: #fff; }
+
+  .footer__hours-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .footer__hours-value {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* ── Copyright Bar ── */
+  .footer__copyright {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 16px 80px;
+  }
+
+  .footer__copyright-inner {
+    {% comment %} max-width: 1200px; {% endcomment %}
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .footer__copyright-inner p { margin: 0; }
+
+  /* ── Tablet ── */
+  @media (max-width: 1024px) {
+    .footer__inner {
+      padding: 48px 40px 32px;
+    }
+
+    .footer__copyright {
+      padding: 16px 40px;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "brand contact"
+        "company products";
+      gap: 40px;
+    }
+
+    .footer__backtop-desktop {
+      margin-bottom: 20px;
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .footer__bg-img--desktop { display: none; }
+    .footer__bg-img--mobile  { display: block; }
+
+    .footer__inner {
+      padding: 32px 24px 28px;
+    }
+
+    .footer__copyright {
+      padding: 14px 24px;
+    }
+
+    /* Show mobile back-to-top, hide desktop one */
+    .footer__backtop-mobile  { display: flex; }
+    .footer__backtop-desktop { display: none; }
+
+    /* 2-col grid: brand full-width, navs side-by-side, contact full-width */
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "brand brand"
+        "company products"
+        "contact contact";
+      gap: 28px 24px;
+    }
+
+    /* Brand: divider at bottom */
+    .footer__brand {
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer__logo-img {
+      width: 100%;
+      height: auto;
+    }
+
+    .footer__brand-desc {
+      max-width: 100%;
+      font-size: 14px;
+    }
+
+    .footer__nav-heading {
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .footer__nav-list {
+      gap: 10px;
+    }
+
+    .footer__nav-link {
+      font-size: 13px;
+    }
+
+    .footer__contact-heading {
+      font-size: 18px;
+    }
+
+    .footer__contact-details {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .footer__contact-item {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-scroll-top]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
 
 {% schema %}
 {
   "name": "t:general.footer",
-  "class": "footer-section spacing-block-start",
+  "class": "footer-section",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
     {
       "type": "image_picker",
       "id": "footer_desktop_background",
@@ -69,9 +510,121 @@
       "label": "Footer Mobile Background"
     },
     {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Brand Description",
+      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "url",
+      "id": "fb_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "ig_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tw_url",
+      "label": "X (Twitter) URL"
+    },
+    {
+      "type": "url",
+      "id": "yt_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Company Menu"
+    },
+    {
+      "type": "text",
+      "id": "company_menu_heading",
+      "label": "Company Menu Heading",
+      "default": "Company"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company Navigation Menu"
+    },
+    {
+      "type": "header",
+      "content": "Products Menu"
+    },
+    {
+      "type": "text",
+      "id": "products_menu_heading",
+      "label": "Products Menu Heading",
+      "default": "Products"
+    },
+    {
+      "type": "link_list",
+      "id": "products_menu",
+      "label": "Products Navigation Menu"
+    },
+    {
+      "type": "header",
+      "content": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact Heading",
+      "default": "Want to get in touch?"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_description",
+      "label": "Contact Description",
+      "default": "<p>We'd love to hear from you!<br>For any feedback or queries, contact us on :</p>"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Operating Hours Label",
+      "default": "Operating Hours:"
+    },
+    {
+      "type": "text",
+      "id": "hours_value",
+      "label": "Operating Hours",
+      "default": "Mon- Sun, 10am to 6pm"
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
       "type": "richtext",
       "id": "footer_copyright_text",
-      "label": "Footer Copyright Text"
+      "label": "Copyright Text",
+      "default": "<p>© 2025 Wellie. Powered by Shopify.</p>"
     }
   ]
 }

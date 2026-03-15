@@ -1,15 +1,16 @@
-<section class="max-w-7xl mx-auto px-20 py-7">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<section class="itr-section">
+  <div class="itr-layout">
+
     <!-- LEFT IMAGE -->
     <div
-      class="rounded-2xl p-8 flex items-center justify-center"
+      class="itr-image-wrap"
       style="background-color: {{ section.settings.bg_color }};"
     >
       {% if section.settings.main_image != blank %}
         <img
           src="{{ section.settings.main_image | image_url: width: 700 }}"
           alt="Dog"
-          class="max-h-[480px] object-contain"
+          class="itr-main-image"
           loading="lazy"
           width="700"
           height="700"
@@ -18,41 +19,194 @@
     </div>
 
     <!-- RIGHT CONTENT -->
-    <div>
-      <h2 class="text-3xl font-semibold text-gray-800 mb-10">
+    <div class="itr-content">
+      <h2 class="itr-heading">
         {{ section.settings.heading }}
       </h2>
 
-      <div class="space-y-8">
+      <div class="itr-items">
         {% for block in section.blocks %}
-          <div class="flex gap-5 pb-8 border-b last:border-b-0">
+          <div class="itr-item" {{ block.shopify_attributes }}>
             <!-- Icon -->
             {% if block.settings.icon != blank %}
               <img
-                src="{{ block.settings.icon | image_url: width: 80 }}"
+                src="{{ block.settings.icon | image_url: width: 120 }}"
                 alt=""
-                class="w-14 h-14 rounded-lg object-cover flex-shrink-0 border border-pink-400"
+                class="itr-icon"
                 loading="lazy"
-                width="80"
-                height="80"
+                width="90"
+                height="90"
               >
             {% endif %}
 
             <!-- Text -->
-            <div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-1">
-                {{ block.settings.title }}
-              </h3>
-              <p class="text-sm text-gray-600 leading-relaxed">
-                {{ block.settings.description }}
-              </p>
+            <div class="itr-item-text">
+              <h3 class="itr-item-title">{{ block.settings.title }}</h3>
+              <p class="itr-item-desc">{{ block.settings.description }}</p>
             </div>
           </div>
         {% endfor %}
       </div>
     </div>
+
   </div>
 </section>
+
+<style>
+  .itr-section {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.5rem 5rem;
+  }
+
+  .itr-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .itr-image-wrap {
+    border-radius: 1.25rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+  }
+
+  .itr-main-image {
+    max-height: 480px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .itr-content {
+    padding-left: 1rem;
+  }
+
+  .itr-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2.5rem;
+    line-height: 1.25;
+  }
+
+  .itr-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .itr-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .itr-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .itr-icon {
+    width: 84px;
+    height: 84px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #f472b6;
+  }
+
+  .itr-item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .itr-item-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .itr-item-desc {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.65;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .itr-section {
+      padding: 2rem 2rem;
+    }
+
+    .itr-layout {
+      gap: 2.5rem;
+    }
+
+    .itr-heading {
+      font-size: 1.6rem;
+    }
+
+    .itr-icon {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .itr-section {
+      padding: 1.5rem 1rem;
+    }
+
+    .itr-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .itr-image-wrap {
+      min-height: 300px;
+      padding: 1.5rem;
+    }
+
+    .itr-main-image {
+      max-height: 300px;
+    }
+
+    .itr-content {
+      padding-left: 0;
+    }
+
+    .itr-heading {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .itr-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 10px;
+    }
+
+    .itr-item-title {
+      font-size: 1rem;
+    }
+
+    .itr-item-desc {
+      font-size: 0.85rem;
+    }
+  }
+</style>
 
 {% schema %}
 {

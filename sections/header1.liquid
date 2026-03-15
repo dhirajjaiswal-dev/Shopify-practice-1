@@ -1,6 +1,23 @@
 <header class="site-header">
   <div class="header-wrapper">
-    <!-- Logo (Left) -->
+
+    <!-- Hamburger (mobile only) -->
+    <button
+      type="button"
+      class="header-hamburger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="4" cy="4" r="2.5" fill="#025A60"/>
+        <circle cx="16" cy="4" r="2.5" fill="#025A60"/>
+        <circle cx="4" cy="16" r="2.5" fill="#025A60"/>
+        <circle cx="16" cy="16" r="2.5" fill="#025A60"/>
+      </svg>
+    </button>
+
+    <!-- Logo -->
     <div class="header-logo">
       {% if section.settings.logo != blank %}
         <a href="{{ routes.root_url }}">
@@ -16,51 +33,443 @@
       {% endif %}
     </div>
 
-    <!-- Navigation Menu (Center) -->
+    <!-- Navigation (desktop only) -->
     <nav class="header-nav">
       <ul>
         {% for link in linklists[section.settings.menu].links %}
-          <li>
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
+          {% if link.links != empty %}
+            <li class="header-nav__item header-nav__item--has-dropdown">
+              <button
+                type="button"
+                class="header-nav__dropdown-toggle"
+                aria-expanded="false"
+                aria-haspopup="true"
+                data-nav-dropdown-toggle
+              >
+                {{ link.title }}
+                <svg class="header-nav__arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1 1L6 6.5L11 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <ul class="header-nav__dropdown" role="menu" hidden>
+                {% for child in link.links %}
+                  <li role="none">
+                    <a href="{{ child.url }}" class="header-nav__dropdown-link" role="menuitem">{{ child.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li class="header-nav__item">
+              <a href="{{ link.url }}" class="header-nav__link">{{ link.title }}</a>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </nav>
 
-    <!-- Icons (Right) -->
+    <!-- Icons (right) -->
     <div class="header-icons">
-      <!-- Search -->
       <a href="{{ routes.search_url }}" aria-label="Search">
         <img
           src="{{ 'https://cdn.shopify.com/s/files/1/0733/3986/3212/files/search_-_01.png?v=1768223726' }}"
           alt="search icon"
-          width="20"
-          height="20"
+          width="24"
+          height="24"
         >
       </a>
 
-      <!-- Account -->
-      <a href="{{ routes.account_url }}" aria-label="Account">
+      <a href="{{ routes.account_url }}" aria-label="Account" class="header-icon-account">
         <img
           src="{{ 'https://cdn.shopify.com/s/files/1/0733/3986/3212/files/user_-_01.png?v=1768223704' }}"
           alt="user icon"
-          width="20"
-          height="20"
+          width="24"
+          height="24"
         >
       </a>
 
-      <!-- Cart -->
-      <a href="{{ routes.cart_url }}" aria-label="Cart">
+      <a href="{{ routes.cart_url }}" aria-label="Cart" data-cart-open-trigger class="header-cart-icon">
         <img
           src="{{ 'https://cdn.shopify.com/s/files/1/0733/3986/3212/files/shopping_cart_-_01.png?v=1768223727' }}"
           alt="cart icon"
-          width="20"
-          height="20"
+          width="24"
+          height="24"
         >
+        <span class="cart-item-count hidden" aria-label="Cart item count"></span>
       </a>
     </div>
   </div>
 </header>
+
+<!-- Mobile Drawer -->
+<nav
+  class="fixed top-0 left-0 w-4/5 max-w-sm h-full bg-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out hidden shadow-lg"
+  data-mobile-menu
+  aria-label="Mobile navigation"
+>
+  <div class="pt-14 px-8 overflow-y-auto h-full relative">
+    <button
+      type="button"
+      class="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 z-50 text-2xl leading-none"
+      aria-label="Close menu"
+      data-menu-close
+    >
+      ✕
+    </button>
+    <ul class="space-y-8 list-none">
+      {% for link in linklists[section.settings.menu].links %}
+        {% if link.links != empty %}
+          <li class="mobile-nav__item--has-dropdown">
+            <button
+              type="button"
+              class="mobile-nav__dropdown-toggle"
+              aria-expanded="false"
+              data-mobile-dropdown-toggle
+            >
+              {{ link.title }}
+              <svg class="mobile-nav__arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 1L6 6.5L11 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <ul class="mobile-nav__dropdown" hidden>
+              {% for child in link.links %}
+                <li>
+                  <a href="{{ child.url }}" class="mobile-nav__dropdown-link">{{ child.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% else %}
+          <li>
+            <a
+              href="{{ link.url }}"
+              class="block no-underline text-[#025A60] font-semibold text-xl hover:underline hover:underline-offset-4"
+            >
+              {{ link.title }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+<!-- Overlay -->
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden"
+  data-mobile-overlay
+  aria-hidden="true"
+></div>
+
+<style>
+  /* ── Mobile base (390px) ── */
+  .site-header {
+    position: relative;
+    background-color: #F9F3F1;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 20px;
+    position: relative;
+  }
+
+  /* Hamburger: visible on mobile */
+  .header-hamburger {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* Logo: absolutely centered */
+  .header-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .header-logo img {
+    width: 148px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Icons: 24px, gap 12px, account hidden on mobile */
+  .header-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .header-icons img {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .header-icon-account { display: none; }
+
+  /* Hide desktop nav on mobile */
+  .header-nav { display: none; }
+
+  /* ── Desktop Nav Links ── */
+  .header-nav > ul {
+    {% comment %} display: flex; {% endcomment %}
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 4px;
+  }
+
+  .header-nav__item {
+    position: relative;
+  }
+
+  .header-nav__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #025A60;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+
+  .header-nav__link:hover {
+    background: rgba(2, 90, 96, 0.08);
+  }
+
+  /* ── Dropdown Toggle Button ── */
+  .header-nav__dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #025A60;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .header-nav__dropdown-toggle:hover {
+    background: rgba(2, 90, 96, 0.08);
+  }
+
+  .header-nav__arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .header-nav__item--has-dropdown[data-open] .header-nav__arrow {
+    transform: rotate(180deg);
+  }
+
+  /* ── Dropdown Menu ── */
+  .header-nav__dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid rgba(2, 90, 96, 0.12);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    z-index: 100;
+  }
+
+  .header-nav__item--has-dropdown[data-open] .header-nav__dropdown {
+    display: block;
+  }
+
+  .header-nav__dropdown-link {
+    display: block;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #025A60;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .header-nav__dropdown-link:hover {
+    background: rgba(2, 90, 96, 0.08);
+    color: #025A60;
+  }
+
+  /* ── Mobile Dropdown ── */
+  .mobile-nav__dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #025A60;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .mobile-nav__arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-nav__item--has-dropdown[data-open] .mobile-nav__arrow {
+    transform: rotate(180deg);
+  }
+
+  .mobile-nav__dropdown {
+    list-style: none;
+    margin: 12px 0 0 0;
+    padding: 0 0 0 16px;
+    border-left: 2px solid rgba(2, 90, 96, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-nav__dropdown[hidden] {
+    display: none;
+  }
+
+  .mobile-nav__dropdown-link {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #025A60;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+  }
+
+  .mobile-nav__dropdown-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* ── Cart badge ── */
+  .header-cart-icon {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .cart-item-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: #FF2B8B;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    /* Desktop: hamburger hidden, logo left, nav visible, account visible */
+    .header-hamburger { display: none; }
+    .header-icon-account { display: flex; }
+
+    .header-logo {
+      position: static;
+      transform: none;
+    }
+
+    .header-nav { display: block; }
+  }
+</style>
+
+<script>
+  function closeAllDesktopDropdowns() {
+    document.querySelectorAll('.header-nav__dropdown').forEach(function(d) {
+      d.style.display = 'none';
+      var btn = d.closest('.header-nav__item--has-dropdown').querySelector('[data-nav-dropdown-toggle]');
+      btn.setAttribute('aria-expanded', 'false');
+      d.closest('.header-nav__item--has-dropdown').removeAttribute('data-open');
+    });
+  }
+
+  // Force-hide all desktop dropdowns on load
+  document.querySelectorAll('.header-nav__dropdown').forEach(function(d) {
+    d.style.display = 'none';
+  });
+
+  // Desktop dropdown toggle
+  document.querySelectorAll('[data-nav-dropdown-toggle]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      var item = btn.closest('.header-nav__item--has-dropdown');
+      var dropdown = item.querySelector('.header-nav__dropdown');
+      var isOpen = dropdown.style.display === 'block';
+
+      closeAllDesktopDropdowns();
+
+      if (!isOpen) {
+        dropdown.style.display = 'block';
+        item.setAttribute('data-open', '');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+      e.stopPropagation();
+    });
+  });
+
+  // Close desktop dropdown on outside click
+  document.addEventListener('click', function() {
+    closeAllDesktopDropdowns();
+  });
+
+  // Mobile dropdown
+  document.querySelectorAll('[data-mobile-dropdown-toggle]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.mobile-nav__item--has-dropdown');
+      var dropdown = item.querySelector('.mobile-nav__dropdown');
+      var isOpen = item.hasAttribute('data-open');
+
+      if (isOpen) {
+        item.removeAttribute('data-open');
+        dropdown.style.display = 'none';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.setAttribute('data-open', '');
+        dropdown.style.display = 'flex';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Force-hide all mobile dropdowns on load
+  document.querySelectorAll('.mobile-nav__dropdown').forEach(function(d) {
+    d.style.display = 'none';
+  });
+</script>
+
+<script src="{{ 'header-javascript.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

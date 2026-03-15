@@ -1,8 +1,191 @@
+@font-face {
+  font-family: 'Harond';
+  font-style: normal;
+  font-display: swap;
+  font-weight: normal;
+  src: url(https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Harond_2.woff2?v=1773383080) format('woff2');
+}
+
+@font-face {
+  font-family: 'Cafeteria';
+  font-style: normal;
+  font-display: swap;
+  font-weight: normal;
+  src: url(https://cdn.shopify.com/s/files/1/0733/3986/3212/files/fonnts.com-Cafeteria_1.woff2?v=1773383571) format('woff2');
+}
+
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: normal;
+  src: url(https://cdn.shopify.com/s/files/1/0733/3986/3212/files/Cabin_Condensed-SemiBold.woff2?v=1773384751) format('woff2');
+}
+
 /* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.main-product-title {
+  font-family: 'Harond', serif;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 1.1;
+  color: #3A3A3E;
+  margin-top: 16px !important;
+}
+
+@media (min-width: 768px) {
+  .main-product-title {
+    font-size: 36px;
+    line-height: 1;
+    margin-top: 24px !important;
+  }
+}
+
+.variant-badge {
+  position: absolute;
+  top: -11px;
+  left: 0;
+  display: inline-block;
+  padding: 2px;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+}
+.variant-badge--pink {
+  background-color: #FF2B8B;
+}
+.variant-badge--teal {
+  background-color: #025A60;
+}
+.variant-badge__fill {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 1px 10px 1px 4px;
+  color: #fff;
+  line-height: 1.4;
+  background-color: #FF2B8B;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+.variant-badge--teal .variant-badge__fill {
+  background-color: #025A60;
+}
+
+.voucher-wrap {
+  position: relative;
+}
+
+/* Dashed curved arc for left notch */
+.voucher-wrap::before,
+.voucher-wrap::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1.5px dashed rgba(2, 90, 96, 0.4);
+  background: transparent;
+  z-index: 1;
+}
+.voucher-wrap::before {
+  left: -13px;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+.voucher-wrap::after {
+  right: -13px;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.voucher-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 22px;
+  color: #025A60;
+  border-radius: 12px;
+  background: rgba(2, 90, 96, 0.08);
+  border: 1.5px dashed rgba(2, 90, 96, 0.4);
+  /* Punch transparent circular notches — also clips the border at the notch */
+  -webkit-mask:
+    radial-gradient(circle at 0 50%, transparent 13px, black 13.5px),
+    radial-gradient(circle at 100% 50%, transparent 13px, black 13.5px);
+  -webkit-mask-composite: destination-in;
+  mask:
+    radial-gradient(circle at 0 50%, transparent 13px, black 13.5px),
+    radial-gradient(circle at 100% 50%, transparent 13px, black 13.5px);
+  mask-composite: intersect;
+}
+
+/* Active variant pill — CSS fallback since Tailwind arbitrary peer-checked may not compile */
+input[type="radio"].variant-option:checked + span {
+  background-color: #025A60 !important;
+  color: #ffffff !important;
+  border-color: #025A60 !important;
+}
+
+.product-tagline {
+  font-family: 'Cafeteria', cursive;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #D4E391;
+}
+
+#ProductPrice {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.5;
+  color: #3A3A3E;
+}
+
+.ProductComparePriced {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #3A3A3E;
+  text-decoration: line-through;
+}
+
+.Mrptagline {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #3A3A3E;
+  margin-top: 8px !important;
+}
+
+/* Variant pills: 2-col grid on mobile, flex row on desktop */
+.variant-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-items: end;
+}
+
+@media (min-width: 768px) {
+  .variant-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+.select-size {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #3A3A3E;
 }
 
 body {
@@ -13,7 +196,7 @@ body {
   height: 100%;
   font-family: var(--font-primary--family);
 }
- 
+
 img,
 picture,
 video,
@@ -99,10 +282,10 @@ svg {
   background-color:#025A60;
   color: #fff;
   padding: 5px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 200;
   text-align: center;
-  
+
 }
 
 
@@ -125,7 +308,7 @@ svg {
     /* object-fit: cover; */
   }
 
-  .header-nav ul { 
+  .header-nav ul {
     display: flex;
     gap: 24px;
     list-style: none;

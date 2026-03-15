@@ -7,7 +7,10 @@ const CartManager = {
     this.overlay = document.querySelector('[data-cart-overlay]');
 
     document.querySelectorAll('[data-cart-open-trigger]').forEach((btn) => {
-      btn.addEventListener('click', () => this.open());
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.open();
+      });
     });
 
     document.querySelector('[data-cart-drawer-close]')?.addEventListener('click', () => this.close());
@@ -17,7 +20,6 @@ const CartManager = {
       this.fetchCart().then((cart) => {
         this.updateCount(cart.item_count);
         this.renderCart(cart);
-        this.open();
       });
     });
 

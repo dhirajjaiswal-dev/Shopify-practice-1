@@ -1,32 +1,15 @@
 <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-3 text-center text-gray-900 pt-8">Love at First Bite.</h2>
 <p class="text-center text-sm md:text-base text-gray-600">Real dogs. Real reactions. Zero convincing required.</p>
 
-<section class="max-w-7xl mx-auto px-4 md:px-6 lg:px-20 py-10" data-reaction-section>
+<section class="w-full py-10 overflow-hidden" data-reaction-section>
   <div class="relative">
-
-    <!-- Left Arrow -->
-    <button
-      type="button"
-      data-slide-prev
-      class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white w-10 h-10 rounded-full shadow hidden sm:flex items-center justify-center"
-    >
-      ‹
-    </button>
-
-    <!-- Right Arrow -->
-    <button
-      type="button"
-      data-slide-next
-      class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white w-10 h-10 rounded-full shadow hidden sm:flex items-center justify-center"
-    >
-      ›
-    </button>
 
     <!-- Slider -->
     <div
       id="reviewSlider"
       data-review-slider
-      class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-8 md:px-12"
+      class="flex gap-4 no-scrollbar"
+      style="overflow-x: hidden; width: 100%;"
     >
       {% for block in section.blocks %}
         <div
@@ -70,7 +53,12 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-  .review-card { width: 300px !important; height: 500px !important; }
+  /* Mobile: 2 cards visible at 390px (185px each + 12px gap + 2×4px edge) */
+  .review-card { width: 185px !important; height: 295px !important; }
+
+  @media (min-width: 768px) {
+    .review-card { width: 300px !important; height: 500px !important; }
+  }
   .review-card .review-video {
     position: absolute;
     top: 0;
